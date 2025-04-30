@@ -1,0 +1,18 @@
+\pagebreak
+\nsection{Infected cells}
+
+\begin{description}
+    \item[\entry{Task:}] Evaluate the number of infected cells by the number of bacteria detected in each of the cells. 
+    \item[\entry{Data:}] ``Infected cells.nd2'' with four channels: nuclei marked by DAPI (blue), bac1 (green), bac2 (red), bac3 (cyan).\textcolor{olive}{I noticed there is a bac3 copy channel in the data now.}
+    \item[\entry{Topics:}] Preprocessing (Gaussian filters), Segmentation (Bright Spots), Binary processing (Grow regions), Data management (Aggregate Children, Append Columns).
+    \item[\entry{Acknowledgement:}] Agnes Foeglein
+    \item[\entry{Duration:}] 40 min
+    \item[\entry{Step by step:}]
+\end{description}
+
+\begin{enumerate}
+    \item Open the file “Infected cells.nd2” and start General Analysis 3
+    \item Segment the cells using the DAPI channel. \soln Use \menu{Preprocessing>Gaussian filters} with filter “Gaussian” and “sigma” 10. Use \menu{Segmentation>Spot Detections>Bright Spot} with diameter 10, contrast 20, symmetry all, Intensity above “30”. Add \menu{Binary Processing>Region growing>Grow Regions} linking A to the binary and B to the filtered image. \solnend
+    \item Segment the bacteria in channels bac1, bac2, bac3. \soln Use \menu{Segmentation > Spot Detections > Bright Spot} with diameter \SI{1}{\micro\meter}, contrast 20, intensity above 150. \solnend
+    \item For each cell, count the number of each type of bacteria. \soln Use \menu{Measurement > Object parenting > Aggregate Children} three times with the DAPI binaries as parent and each bac1, bac2, bac3 binaries as children. Merge the 3 tables into one using \menu{Data Management>Basic>Append Columns}. \solnend
+\end{enumerate}

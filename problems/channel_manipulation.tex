@@ -1,0 +1,22 @@
+\pagebreak
+\nsection{Channel manipulation}
+
+\begin{description}
+    \item[\entry{Task:}] Remove a channel from a dataset.
+    \item[\entry{Data:}] The file ``isim\_001.nd2'' has two channels Red and Blank.
+    \item[\entry{Topics:}] Store results, Batch GA3.
+    \item[\entry{Duration:}] 10 min.
+    \item[\entry{Step by step:}]
+\end{description}
+
+\begin{enumerate}
+    \item Open the image “isim\_001.nd2” using “File > Open” or a drag and drop.
+    \item Open the General analysis 3 interface using “Image > New GA3 recipe” or a right click on the background, select “Analysis Controls > Analysis Explorer”, select “Create New > General Analysis 3”. 
+    \item Select the Blank channel and click “Do not Store this Result”.
+    \item Save the recipe, using you name as a prefix. \textcolor{olive}{"Save" saves the recipe in the software; "Export" allows you to save it locally with a specified path on the PC. When using an existing recipe, it can be imported by right clicking on the background, select “Analysis Controls > Analysis Explorer”.}
+    \item Navigate to “Image > Batch GA3” or right click on the background, select “Batch GA3”.
+    \item Press the first icon “Add files”. Select the recipe and the three isim\_xxx.nd2 files.
+    \item Tick “Keep Original”.
+    \item Press “Run”.
+    \item Open the processed images.
+\end{enumerate}

@@ -1,0 +1,35 @@
+\pagebreak
+\nsection{Synthetic cells}
+
+\begin{description}
+    \item[\entry{Task:}] For each cell, count the number of red dots and measure the area of the nuclei.
+    \item[\entry{Data:}] “synthetic cells.nd2” with three channels: dots (red), cytoplasm (green) and nuclei (blue). 
+    \item[\entry{Topics:}] object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
+    \item[\entry{Duration:}] 30 min
+    \item[\entry{Step by step:}]
+\end{description}
+
+\begin{enumerate}
+    \item Load the image “synthetic cells.nd2”.
+    \item Create binary masks for all the channels. 
+    \item Hierarchical analysis (3 ways)
+    \begin{enumerate}
+        \item[I.] Associate a cell to each dot. Use \menu{Measurement > Parent ID} linking A (parent) to the “cytoplasm” binary and B (child) to the “dots” binary.
+        
+        \item[] Group the row by cell. Add a module \menu{Data Management > Sort \& Filter > Group Records} and drop on top a module \menu{Data Management > Statistics >  Aggregate Rows}. Set the Column to cytoplasmID in GroupRecords and the set the line “ObjectId” to “Count” in AggregateRows. 
+
+        \item[II.] Associate for each cell, the list of dots. Use \menu{Measurement > Child ID} linking A (parent) to the “cytoplasm” binary and B (child) to the “dots” binary.
+
+        \item[] Group the row by cell. Add a module \menu{Data Management > Sort \& Filter > Group Records} and drop on top a module \menu{Data Management >Statistics > Aggregate Rows}. Set the Column to “ObjectId” in “GroupRecords” and the set the line “dotsID” to “Count” in AggregateRows. 
+
+        \item[III.] Directly compute the number of dots per cells. Drop the module \menu{Measurement>Object parenting>Aggregate Children} on the cytoplasm binary and link B (child) to the dots binary. 
+ 
+    \end{enumerate}
+
+    \item Measure the area of the nuclei. \soln Link \menu{Measurement > Object Size > Object Area} to the nuclei binary. \solnend
+    \item Add the cell ID to the records of nuclei area. \soln Use \menu{Measurement > Parent ID} linking A (parent) to the “cytoplasm” binary and B (child) to the “nuclei” binary. Use \menu{Data Management > Basic > Append Columns} or \menu{Data Management > Basic > Join Records} linking the two previous records and using Object ID to join the tables A and B. \solnend
+    \item Compute the area of nuclei per cell and count the number of nuclei. \soln Add a module \menu{Data Management > Sort \& Filter > Group Records} and drop on top a module \menu{Data Management > Statistics >  Aggregate Rows}. Set the Column to “Cytoplasmid” in “GroupRecords” and the set the line “ObjectId” to “Count” and “ObjectArea” to “sum” in “AggregateRows”. \solnend
+    \item Create a table with the number of dots, the number of nuclei and the area of each nuclei per cell. \soln Use \menu{Data Management > Basic > Join Records} using the cytoplasmId to link the table A and B. \solnend
+    \item Keep only the necessary columns in the final records table.  \soln Use \menu{Data Management > Basic > Modify Columns} to select and rename the columns. \solnend
+
+\end{enumerate}

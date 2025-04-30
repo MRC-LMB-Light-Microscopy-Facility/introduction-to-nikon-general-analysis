@@ -1,0 +1,55 @@
+%\documentclass[fontsize=9pt,colorlinks=true,linkcolor=black,urlcolor=skyblue1,a4paper,DIV=calc]{scrartcl}
+%\usepackage{beamerarticle}
+
+\documentclass[answers]{exam}
+
+\input{preamble.tex}
+%\input{macros.tex}
+
+\renewcommand{\questionlabel}{\textbf{Problem \thequestion.}}
+\renewcommand{\solutiontitle}{}
+
+\newcommand*{\nsection}[1]{
+    \section*{#1}
+    \addcontentsline{toc}{section}{#1}
+}
+\usepackage{siunitx}
+
+\newcommand{\entry}[1]{\textcolor{blue}{\textbf{#1}}}
+
+\usepackage{menukeys} 
+
+\newcommand{\showsolutions}{\long\def\soln ##1\solnend{##1}}
+\newcommand{\nosolutions}{\long\def\soln##1\solnend{}}
+
+\showsolutions
+%\nosolutions
+
+\title{\Huge{Nikon NIS-Elements}
+	\\
+\LARGE\scshape{General Analysis 3}}
+\author{Dina Ratsimandresy, Jérôme Boulanger}
+\date{June 2024}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+
+\input{intro}
+\input{problems/channel_manipulation}
+\input{problems/nuclei_segmentation}
+\input{problems/synthetic_cells}
+\input{problems/particle_tracking}
+\input{problems/cargo_relocation}
+\input{problems/infected_cells}
+\input{problems/cell_division}
+
+
+% % in case of needing citations
+% \bibliographystyle{plainurl}
+% \bibliography{refs}
+
+\end{document}
