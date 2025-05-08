@@ -1,22 +1,29 @@
-\pagebreak
-\nsection{Channel manipulation}
+\section{Multi-image splitter}
 
-\begin{description}
-    \item[\entry{Task:}] Remove a channel from a dataset.
-    \item[\entry{Data:}] The file ``isim\_001.nd2'' has two channels Red and Blank.
-    \item[\entry{Topics:}] Store results, Batch GA3.
-    \item[\entry{Duration:}] 10 min.
-    \item[\entry{Step by step:}]
-\end{description}
+\subsection{Problem}
 
-\begin{enumerate}
-    \item Open the image “isim\_001.nd2” using “File > Open” or a drag and drop.
-    \item Open the General analysis 3 interface using “Image > New GA3 recipe” or a right click on the background, select “Analysis Controls > Analysis Explorer”, select “Create New > General Analysis 3”. 
-    \item Select the Blank channel and click “Do not Store this Result”.
-    \item Save the recipe, using you name as a prefix. \textcolor{olive}{"Save" saves the recipe in the software; "Export" allows you to save it locally with a specified path on the PC. When using an existing recipe, it can be imported by right clicking on the background, select “Analysis Controls > Analysis Explorer”.}
-    \item Navigate to “Image > Batch GA3” or right click on the background, select “Batch GA3”.
-    \item Press the first icon “Add files”. Select the recipe and the three isim\_xxx.nd2 files.
-    \item Tick “Keep Original”.
-    \item Press “Run”.
-    \item Open the processed images.
+Images of Invitrogen's FluoCell prepared slide with BPAE cells stained with MitoTracker Red CMXRos have been acquired on a Nikon ISIM microscope equipped with a multi image splitter. The software then always capture two images. However, only one marker was imaged and we would like to discard the blank image. We want to automatize this task to process several images at once and reduce the size of the dataset. The aim of this example is to illustrate the possibility to modify the original files using a GA3 recipe and potentially loose data.
+
+\paragraph{Dataset} The three files \path{isim_001.nd2} .. \path{isim_003.nd2}  have two channels:
+    \begin{enumerate}
+        \item Red : Image from the frist camera to keep
+        \item Blank : Image to discard
+    \end{enumerate}
+
+\paragraph{Concepts} Store results, Batch GA3
+
+
+\subsection{Step-by-step instructions}
+\begin{enumerate} 
+    \item Open the image \path{isim_001.nd2} using \menu{File > Open} or a drag and drop.
+    \item Open General Analysis 3 (see introduction)
+    \item Select the Blank channel and select \menu{Do not Store this Result}. Note that a warning appear now at the bottom of the interface: ``Warning: Execution will remove some existing channels.''
+    \item You can run the macro using \menu{Run now}, the image loaded in memory is modified, but the file is not saved.
+    \item Save the recipe.
+    \item Navigate to \menu{Image > Batch GA3}.
+    \item Press the first icon \menu{Add files} and select the recipe and the three \path{isim_001.nd2} .. \path{isim_003.nd2}  files.
+    \item Tick \menu{Keep Original} to save the results in a new set of files in a folder  \path{data/recipe_name +++BGM+++_date_time_}
+    \item Press \menu{Run}.
+    \item The jobs are now also listed under the recipe in the Analysis Explorer.
+    \item Open the processed images from the folder \path{data/+++BGM+++_date_time_}
 \end{enumerate}

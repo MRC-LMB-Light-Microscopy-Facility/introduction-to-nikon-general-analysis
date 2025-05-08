@@ -1,0 +1,54 @@
+\documentclass{minimal}
+%  1360x768
+\usepackage[paperheight=3.84in,paperwidth=6.8in,left=0.3in]{geometry}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{tgbonum}
+\fontfamily{qcr}
+% \renewcommand\normalsize{\fontsize{12pt}{14pt}\selectfont}   
+\newcommand{\titlefont}{\fontsize{17.28pt}{30pt}\selectfont}   
+\newcommand{\subtitlefont}{\fontsize{12pt}{24pt}\selectfont} 
+\setlength{\parindent}{0in}  
+% \pagenumbering{arabic}  % but no page numbers are printed because:
+% \pagestyle{empty}   
+
+\begin{document}
+
+\begin{tikzpicture}
+    \node[anchor=west] at (3.2in,-0.3in) {\includegraphics[width=3in]{artwork/reproducibility.jpg}};
+    \node[anchor=west] at (1in,-0.8in) {\begin{minipage}{1.2in}\centering \textbf{Register here:} \\ \includegraphics[width=0.75in]{artwork/qr.png}\end{minipage}};
+    \node[anchor=west] at (0in,1.2in) {\textbf{\titlefont Hands-on Nikon NIS-Elements GA3 Training}};
+    \node[anchor=west] at (0,0.3in) {
+        \begin{minipage}{3in}
+            % \textbf{\titlefont Hands-on Nikon NIS-Elements GA3 Training};
+            % \textbf{\titlefont HANDS-ON NIKON NIS-ELEMENTS GA3 TRAINING}
+            
+            \textbf{\subtitlefont Build Your Own Workflows}
+            \vspace{0.25cm}
+        
+            June 2nd and 3rd
+            
+            \vspace{0.25cm}
+            % \textbf{Topics:} 
+            Preprocessing, Segmentation, AI segmentation, Tracking, Object parenting, Batch processing, \dots
+
+
+        \end{minipage}
+    };
+
+\end{tikzpicture}
+
+
+
+
+
+
+
+% \begin{tikzpicture}
+%     \node[align=left] at (0,5){\LARGE \bf Hands-on Nikon NIS-Elements GA Training};
+%     \node[align=left] at (-1,4){\Large Build Your Own Workflows};
+%     \node[align=left] at (0,3){June 2nd and 3rd};
+% \end{tikzpicture}
+
+\end{document}

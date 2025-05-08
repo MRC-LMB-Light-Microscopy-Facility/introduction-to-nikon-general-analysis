@@ -1,35 +1,76 @@
-\pagebreak
-\nsection{Synthetic cells}
+\section{Synthetic cells}
 
-\begin{description}
-    \item[\entry{Task:}] For each cell, count the number of red dots and measure the area of the nuclei.
-    \item[\entry{Data:}] “synthetic cells.nd2” with three channels: dots (red), cytoplasm (green) and nuclei (blue). 
-    \item[\entry{Topics:}] object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
-    \item[\entry{Duration:}] 30 min
-    \item[\entry{Step by step:}]
-\end{description}
+\subsection{Problem}
+In this problem, we make abstraction of the preprocessing steps and focus on the manipulation of binary layers. The image is a sketch representation of three cells with nuclei, cyctosol and some putative vesicles. We want to count the number of vesicle and the area of the nuclei area for each cell.
+
+\begin{center}
+\begin{tabular}{rrr}
+    Cell ID& Number of endosomes& Nuclei area[px$^2$]\\
+    1&8&6562\\
+    2&13&7668\\
+    3&9&11895\\
+\end{tabular}   
+\end{center}
+
+\paragraph{Dataset:} The image is \path{synthetic_cells.nd2} with the following channels:
+\begin{itemize}\setlength\itemsep{0em}
+    \item red: endosomes
+    \item green: cytoplasm
+    \item blue: nuclei
+\end{itemize}
+
+\paragraph{Concepts:} object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
+
+% \begin{description}
+%     \item[Task:] For each cell, count the number of red dots and measure the area of the nuclei.
+%     \item[Data:] ``synthetic cells.nd2'' with three channels: dots (red), cytoplasm (green) and nuclei (blue). 
+%     \item[Topics:] object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
+%     \item[Duration:] 30 min
+%     \item[Step by step:]
+% \end{description}
+
+\subsection{Step-by-step instructions}
 
 \begin{enumerate}
-    \item Load the image “synthetic cells.nd2”.
-    \item Create binary masks for all the channels. 
-    \item Hierarchical analysis (3 ways)
-    \begin{enumerate}
-        \item[I.] Associate a cell to each dot. Use \menu{Measurement > Parent ID} linking A (parent) to the “cytoplasm” binary and B (child) to the “dots” binary.
-        
-        \item[] Group the row by cell. Add a module \menu{Data Management > Sort \& Filter > Group Records} and drop on top a module \menu{Data Management > Statistics >  Aggregate Rows}. Set the Column to cytoplasmID in GroupRecords and the set the line “ObjectId” to “Count” in AggregateRows. 
+    \item Load the image ``synthetic cells.nd2''.
 
-        \item[II.] Associate for each cell, the list of dots. Use \menu{Measurement > Child ID} linking A (parent) to the “cytoplasm” binary and B (child) to the “dots” binary.
+    \item Create binary masks for all the channels with the names ``endosomes'', ``cells'' and ``nuclei'' \endnote{Use a threshold with value 128-255 for example.}. 
 
-        \item[] Group the row by cell. Add a module \menu{Data Management > Sort \& Filter > Group Records} and drop on top a module \menu{Data Management >Statistics > Aggregate Rows}. Set the Column to “ObjectId” in “GroupRecords” and the set the line “dotsID” to “Count” in AggregateRows. 
+    \item For creating a parent-child hierarchy associating the endosomes to the cells and count the number of endosomes per cell, add the action \menu{Measurement>Object parenting>Aggregate Children} with A (parent): ``cells'' binary and B (child): ``endosomes''. 
 
-        \item[III.] Directly compute the number of dots per cells. Drop the module \menu{Measurement>Object parenting>Aggregate Children} on the cytoplasm binary and link B (child) to the dots binary. 
- 
-    \end{enumerate}
+    % \begin{description}
+    %     \item[Option 1] Associate a parent to each endosome and group the records
+    %     \begin{itemize}
+    %         \item To associate a cell to each dot,  use \menu{Measurement > Object parenting > Parent ID} linking A (parent) to the ``cytoplasm'' binary and B (child) to the ``dots'' binary.
+    %         \item Group the row by adding a module \menu{Data Management > Grouping > Group Records} and use cytoplasmID.    
+    %         \item Add the module \menu{Data Management > Grouping >  Aggregate Rows} and set the line ``ObjectId'' to ``Count'' in AggregateRows. 
+    %     \end{itemize}
 
-    \item Measure the area of the nuclei. \soln Link \menu{Measurement > Object Size > Object Area} to the nuclei binary. \solnend
-    \item Add the cell ID to the records of nuclei area. \soln Use \menu{Measurement > Parent ID} linking A (parent) to the “cytoplasm” binary and B (child) to the “nuclei” binary. Use \menu{Data Management > Basic > Append Columns} or \menu{Data Management > Basic > Join Records} linking the two previous records and using Object ID to join the tables A and B. \solnend
-    \item Compute the area of nuclei per cell and count the number of nuclei. \soln Add a module \menu{Data Management > Sort \& Filter > Group Records} and drop on top a module \menu{Data Management > Statistics >  Aggregate Rows}. Set the Column to “Cytoplasmid” in “GroupRecords” and the set the line “ObjectId” to “Count” and “ObjectArea” to “sum” in “AggregateRows”. \solnend
-    \item Create a table with the number of dots, the number of nuclei and the area of each nuclei per cell. \soln Use \menu{Data Management > Basic > Join Records} using the cytoplasmId to link the table A and B. \solnend
-    \item Keep only the necessary columns in the final records table.  \soln Use \menu{Data Management > Basic > Modify Columns} to select and rename the columns. \solnend
+    %     \item[Option 2] Associate a list of child to each cytoplasm and group the records
+    %     \begin{itemize}
+    %     \item Associate for each cytoplasm, the list of endosomes using \menu{Measurement > Object parenting > Child ID} linking A (parent) to the ``cytoplasm'' binary and B (child) to the ``endosomes'' binary.
+    %     \item Group the row by ObjectId using the action \menu{Data Management > Grouping > Group Records} 
+    %     \item Add the action \menu{Data Management > Grouping > Aggregate Rows} and set ``dotsID'' to ``Count'' 
+    %     \end{itemize}
+
+    %     \item[Option 3] The element ``Aggregate children'' enable to compute parenting and aggregate by parent at once.
+    %     \begin{itemize}
+    %         \item Drop the module \menu{Measurement>Object parenting>Aggregate Children} on the ``cytoplasm'' binary and link B (child) to the ``endosomes'' binary. 
+    %     \end{itemize}
+    % \end{description}
+
+    \item Measure the area of each nuclei using \menu{Measurement > Object Size > Object Area}.
+    
+    \item Add the cell ID to the records of nuclei area using \menu{Measurement > Object parenting > Parent Id} with A (parent) to the ``cell'' and B (child) to the ``nuclei'' binary. 
+    
+    \item Use \menu{Data Management > Basic > Join Records} to join using ``Object Id'' for tables A and B linking the area measurements and the parenting.
+    
+    \item Group the row by ``CellId'' using the action \menu{Data Management > Grouping > Group Records} 
+    
+    \item Add the action \menu{Data Management > Grouping > Aggregate Rows} and set ``Object Area'' to ``Sum'' 
+    
+    \item Use \menu{Data Management > Basic > Join Records} to join using ``Cell Id'' for tables A and B.
+    
+    \item Use \menu{Data Management > Basic > Rename Columns} to keep only the necessary columns.
 
 \end{enumerate}

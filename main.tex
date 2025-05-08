@@ -1,23 +1,29 @@
-%\documentclass[fontsize=9pt,colorlinks=true,linkcolor=black,urlcolor=skyblue1,a4paper,DIV=calc]{scrartcl}
-%\usepackage{beamerarticle}
-
-\documentclass[answers]{exam}
-
-\input{preamble.tex}
-%\input{macros.tex}
-
-\renewcommand{\questionlabel}{\textbf{Problem \thequestion.}}
-\renewcommand{\solutiontitle}{}
-
-\newcommand*{\nsection}[1]{
-    \section*{#1}
-    \addcontentsline{toc}{section}{#1}
-}
+\documentclass[a4paper,DIV=17,dvipsnames,headsepline]{scrartcl}
+\usepackage[utf8]{inputenc}
+% \usepackage[margin=1in]{geometry}
+\usepackage{graphicx}    % For including images
+\usepackage{hyperref}    % For hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    filecolor=magenta,      
+    urlcolor=MidnightBlue,
+    pdftitle={QuPath training},
+    pdfpagemode=FullScreen,
+    }
+\usepackage{xcolor}      % For colored text (e.g., to highlight commands)
+\usepackage{menukeys}   % forkeys and menu
+\usepackage{listings}   % for code
 \usepackage{siunitx}
+\usepackage{lmodern}    % the font
+\renewcommand{\familydefault}{\sfdefault}  % sans serif fonts
+\usepackage{booktabs}   % nicer table
+\usepackage{fourier}    % warning symbol
+\pagestyle{headings}     % use srartcl headings style
 
-\newcommand{\entry}[1]{\textcolor{blue}{\textbf{#1}}}
+\usepackage{enotez}      % create end notes with the solutions
+\setenotez{backref=true}
 
-\usepackage{menukeys} 
 
 \newcommand{\showsolutions}{\long\def\soln ##1\solnend{##1}}
 \newcommand{\nosolutions}{\long\def\soln##1\solnend{}}
@@ -25,31 +31,33 @@
 \showsolutions
 %\nosolutions
 
-\title{\Huge{Nikon NIS-Elements}
-	\\
-\LARGE\scshape{General Analysis 3}}
+\title{Nikon NIS-Elements\\ General Analysis 3}
 \author{Dina Ratsimandresy, Jérôme Boulanger}
-\date{June 2024}
+\date{May 2025}
 
 \begin{document}
 
 \maketitle
 
-\tableofcontents
+% \tableofcontents
 
-
-\input{intro}
+\input{introduction} 
+\newpage
 \input{problems/channel_manipulation}
+\newpage
 \input{problems/nuclei_segmentation}
+\newpage
 \input{problems/synthetic_cells}
-\input{problems/particle_tracking}
+\newpage
 \input{problems/cargo_relocation}
-\input{problems/infected_cells}
-\input{problems/cell_division}
+% \newpage
+% \input{problems/particle_tracking}
+% \newpage
+% \input{problems/infected_cells}
+% \newpage
+% \input{problems/cell_division}
 
-
-% % in case of needing citations
-% \bibliographystyle{plainurl}
-% \bibliography{refs}
+\appendix
+\printendnotes
 
 \end{document}

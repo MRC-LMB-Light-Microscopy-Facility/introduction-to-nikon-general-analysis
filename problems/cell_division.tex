@@ -1,26 +1,25 @@
-\pagebreak
-\nsection{Cell division in dendraster excentricus}
+\section{Cell division in dendraster excentricus}
 
 \begin{description}
-    \item[\entry{Task:}] Track the cells along the division and count the number of cells over time.
-    \item[\entry{Data:}] “cell division.tif” with one channel and 200 time points.
-    \item[\entry{Topics:}] preprocessing (Rolling Ball), segmentation (Threshold), object tracking, measurement (Object Count), results (Linechart)
-    \item[\entry{Reference:}] 
+    \item[Task:] Track the cells along the division and count the number of cells over time.
+    \item[Data:] ``cell division.tif'' with one channel and 200 time points.
+    \item[Topics:] preprocessing (Rolling Ball), segmentation (Threshold), object tracking, measurement (Object Count), results (Linechart)
+    \item[Reference:] 
         George Von Dassow (2011) CIL:15798, Dendraster excentricus. \\
         CIL.Dataset. https://doi.org/doi:10.7295/W9CIL15798
-    \item[\entry{Duration:}] 40 min
-    \item[\entry{Step by step:}]
+    \item[Duration:] 40 min
+    \item[Step by step:]
 \end{description}
 
 \begin{enumerate}
-    \item Open the image “cell division.tif” and create a new GA3 workflow.
+    \item Open the image ``cell division.tif'' and create a new GA3 workflow.
     \item Segment the nuclei of each cell. \soln Use \menu{Preprocessing>Background>Rolling Ball} with a radius of 10px followed by \menu{Segmentation>Threshold>Threshold} with intensity above 10, Smooth 8x, Clean 1x, FillHoles OFF, Separate 1x and Size[px] above 5px. \solnend
     \item Make sure that the Binaries are stored but that channels are not modified.
     \item Count the number of cell for each time point. Use \menu{Measurement>Whole Field>Object Count} and \menu{Tracking>Tracks>Accumulate \& Group}.
-    \textcolor{olive}{I would put these two operations into two separate point; keeping the object count as it is and add the following point for tracking}
-    \textcolor{olive}{\item Track the cells over time. Use \menu{Tracking > 2D Tracking > Track Particles} with “Time Column” set to "TimeLapseIndex" or "Time"\soln and “Maximum Speed” set to INF \solnend. Add \menu{Tracking > Tracks > Accumulate \& Group}.}
+    I would put these two operations into two separate point; keeping the object count as it is and add the following point for tracking
+    \item Track the cells over time. Use \menu{Tracking > 2D Tracking > Track Particles} with ``Time Column'' set to "TimeLapseIndex" or "Time"\soln and ``Maximum Speed'' set to INF \solnend. Add \menu{Tracking > Tracks > Accumulate \& Group}.
     \item Graph the number of cells over time. Use \menu{Results>Graphs>Linechart}
     \item Run the recipe on all frames. 
     \item Use the tracking app from the main interface to track all the binaries.
-    \textcolor{olive}{Click on tracking options; allow track split; observe from the image stack and estimate how many mitosis happen on average over the time period and determine probability.}
+    Click on tracking options; allow track split; observe from the image stack and estimate how many mitosis happen on average over the time period and determine probability.
 \end{enumerate}

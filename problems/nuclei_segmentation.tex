@@ -1,27 +1,26 @@
-\pagebreak
-\nsection{Nuclei segmentation}
+\section{Nuclei segmentation} \label{sec:nuclei-segmentation}
 
-\begin{description}
-    \item[\entry{Task:}] Measure the circularity, mean intensity and area of each nuclei in the image.
-    \item[\entry{Data:}] The file “nuclei.tif” has a single channel “Mono”.
-    \item[\entry{Topics:}] preprocessing (Rolling Ball, Median), segmentation (Threshold), measurement (Circularity, Mean Obj Intensity, Object Area)
-    \item[\entry{Duration:}] 20 min
-    \item[\entry{Step by step:}]
-\end{description}
+\subsection{Problem}
 
+Segmenting the nuclei of cells in microscopy images is often the first step in the quantitative analysis of imaging data for biological and biomedical applications. Here we use an image of the Kaggle Science Data Bowl competition where cells were stained with DAPI or Hoechst. A basic approach based on classifying the pixels of a preprocessed image as foregroud and background using a threshold is used here.
+
+\paragraph{Dataset} The file ``nuclei.tif'' has a single channel ``Mono''.
+
+\paragraph{Concepts} preprocessing (Rolling Ball, Median), segmentation (Threshold), measurement (Circularity, Mean Obj Intensity, Object Area)
+
+
+\paragraph{Reference} Caicedo, J.C., Goodman, A., Karhohs, K.W. et al. Nucleus segmentation across imaging experiments: the 2018 Data Science Bowl. Nat Methods 16, 1247–1253 (2019). \url{https://doi.org/10.1038/s41592-019-0612-7}
+
+% 20 min
+
+\subsection{Step-by-step instructions}
 \begin{enumerate}
-    \item Load the image “nuclei.tif” using “File > Open” or a drag and drop.
-    \item Open the General analysis 3 interface using “Image > New GA3 recipe” or a right click on the background, select “Analysis Controls > Analysis Explorer”, select “Create New > General Analysis 3”. 
-    \item Correct uneven background. \soln Use \menu{Preprocessing > Rolling Ball} with a radius equal to 26 px and tick \menu{Signal is bright}. \solnend \textcolor{olive}{Radius of the Rolling Ball should be larger than the object of interest.}
-    \item Reduce the noise level. \soln For example, using a median filter with \menu{Preprocessing > Median}, set the radius to 2 px. \solnend
-    \item Segment the nuclei. \soln Use \menu{Segmentation > Threshold > Threshold}. Set the with an intensity range in [12, 255], Smooth 1x, Clean 1x, FillHoles OFF, Separate 2x, Size[px] 10-max. \solnend
-    \item Measure the circularity of the nuclei. \soln Use \menu{Measurement > Object shape > Circularity}. \solnend 
-    \item Measure the mean intensity of the nuclei. \soln Use \menu{Measurement > Object intensity > Mean Obj Intensity} by setting the segmented region as the A (Binary) and the input as B (Color). \solnend
-    \item Measure the area of the nuclei. \soln Use \menu{Measurement > Object size > Object Area}. \solnend
-    \item To group the three records into one single record, press Ctrl and select the three modules the \menu{Circularity}, \menu{MeanObjIntensity} and \menu{ObjectArea} then right click and select “Make Group”.
-    \item If needed do the same as in step 8 for RollingBall and Median modules.
+    \item Open the image ``nuclei.tif''.
+    \item Start the GA3 module.
+    \item Smooth the image using for example a median filter (\menu{Preprocessing > Median}) \endnote{radius:2px}.
+    \item Correct uneven background using a rolling ball from \menu{Preprocessing > Rolling Ball} \endnote{radius:20px, signal is bright: ticked}.
+    \item Classify the pixels of the image as foreground (nuclei) or background using a threshold. Drag the element \menu{Segmentation > Threshold > Threshold} on the previous step and adjust the parameters to segment the nuclei \endnote{Intensity range from 12 to 255, smooth:1x, clean:1x, fill holes:off, separate:2x, size:10-inf}.
+    \item Measure the circularity and mean intensity of the segmented binaries using \menu{Measurement > Object shape > Circularity} and  \menu{Measurement > Object intensity > Mean Obj Intensity}\endnote{For measuring the mean intensity of objects, you'll need a binary mask (A) and an intensity mask (B).}. Dropping them on top of each other will automatically append the columns into a single table.
+    \item To quickly inspect the properties of the measured regions, create a scatter plot using \menu{Results>Graphs>Scatterplot}.
 \end{enumerate}
 
-\begin{description}
-    \item[\entry{Optional:}] scatter plot, find mitosis, etc
-\end{description}

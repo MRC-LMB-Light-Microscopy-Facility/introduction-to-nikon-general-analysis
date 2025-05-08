@@ -1,25 +1,24 @@
-\pagebreak
-\nsection{Particle tracking}
+\section{Particle tracking}
 
 \begin{description}
-    \item[\entry{Task:}] Track simulated single particle moving in the field of view.
-    \item[\entry{Data:}] ``synthetic beads.nd2'' with one channel and 20 time points.
-    \item[\entry{Topics:}] Segmentation (Bright Spots), Tracking (Time \& centroid, Track Particles, Accumulate \& group, Speed), Measurement (Mean Obj Intensity), Results (Linechart)
-    \item[\entry{Duration:}] 40 min
-    \item[\entry{Step by step:}]
+    \item[Task:] Track simulated single particle moving in the field of view.
+    \item[Data:] ``synthetic beads.nd2'' with one channel and 20 time points.
+    \item[Topics:] Segmentation (Bright Spots), Tracking (Time \& centroid, Track Particles, Accumulate \& group, Speed), Measurement (Mean Obj Intensity), Results (Linechart)
+    \item[Duration:] 40 min
+    \item[Step by step:]
 \end{description}
 
 \begin{enumerate}
-    \item Open the file “synthetic beads.nd2” and create a new General Analysis 3 workflow.
+    \item Open the file ``synthetic beads.nd2'' and create a new General Analysis 3 workflow.
     \item Detect the particles in the image. \soln Use \menu{Segmentation>Spot Detections>Bright Spots} with diameter 0.5 and contrast 2. \solnend
     \item Extract the centroid of each particle. \soln Use the \menu{Tracking>2D Object Position>Time \& Centroid}. \solnend
     \item Measure the mean intensity of each particle. \soln Use \menu{Measurement>Object intensity>Mean Obj Intensity}. \solnend
     \item Merge the two tables to have the centroid and the mean intensity of each particle in one table.  \soln Use \menu{Data Management>Basic>Join Records} using the ObjectId to link the tables A and B. \solnend
-    \item Track the particles over time. Use \menu{Tracking > 2D Tracking > Track Particles} with “Time Column” set to "TimeLapseIndex" or "Time"\soln and “Maximum Speed” set to 5 \solnend. Add \menu{Tracking > Tracks > Accumulate \& Group}. \textcolor{olive}{Tracking objects applies to the image while track particle applies to the records; max speed corresponds to max speed of the objects between consecutive frames (however not working in the software at the moment), while max gap size is max allowed skipped frames.}
-    \item Measure the speed of each tracked particle. \soln Use \menu{Tracking > Tracking features > Speed} and set “DiffTime” to Time. \solnend
-    \item Display the tracks. Use \menu{Results > Linechart}, in the Data tab use “CentroidX” for theh “X Axis” and “CentroidY” for the “Y Axis Left”.
+    \item Track the particles over time. Use \menu{Tracking > 2D Tracking > Track Particles} with ``Time Column'' set to "TimeLapseIndex" or "Time"\soln and ``Maximum Speed'' set to 5 \solnend. Add \menu{Tracking > Tracks > Accumulate \& Group}. Tracking objects applies to the image while track particle applies to the records; max speed corresponds to max speed of the objects between consecutive frames (however not working in the software at the moment), while max gap size is max allowed skipped frames.
+    \item Measure the speed of each tracked particle. \soln Use \menu{Tracking > Tracking features > Speed} and set ``DiffTime'' to Time. \solnend
+    \item Display the tracks. Use \menu{Results > Linechart}, in the Data tab use ``CentroidX'' for theh ``X Axis'' and ``CentroidY'' for the ``Y Axis Left''.
 \end{enumerate}
 
 \begin{description}
-    \item[\entry{Optional:}] Use the tracking module on the binaries generate by the workflow.
+    \item[Optional:] Use the tracking module on the binaries generate by the workflow.
 \end{description}
