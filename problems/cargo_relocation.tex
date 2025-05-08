@@ -2,9 +2,10 @@
 
 \subsection{Problem}
 
-In this example, we are interested into quantifying the capture of syntaxin-16 cargos vesicles by the mitochondria when the protein TBC1D23 is relocated to the mitochondria.  Prepared cells were imaged using a Zeiss confocal microscope using a 63x/1.4NA oil immersion lens.
+In this example, we are interested into quantifying the capture of syntaxin-16 cargos vesicles by the mitochondria when the protein TBC1D23 is relocated to the mitochondria. We want to quantify for each cell the level of colocalization between the mitochondria and the cargo to measure the effect of mutant of TBC1D23 on the effectivness of the cargo tethering. Note that not all cells are transfected.
 
-\paragraph{Dataset} We will use the file ``Zeiss1344.lsm'' which have the following channels:
+
+\paragraph{Dataset} Prepared cells were imaged using a Zeiss confocal microscope using a 63x/1.4NA oil immersion lens. We will use the file ``Zeiss1344.lsm'' which have the following channels:
 \begin{itemize}\setlength\itemsep{0em}
     \item Ch2-T1 : Golgi maker GM130
     \item ChS2-T2 : cargo protein
@@ -25,21 +26,19 @@ DOI:10.1126/sciadv.adl0608
     \item Open the image ``Zeiss1344.lsm''.
     \item Segment the cells using a seeded watershed approach by following the three steps below:
     \begin{enumerate}
-        \item Create a mask for the cells using the Golgi marker (Ch2-T1) channel. 
-median filter 2px
-threshold 8-255
-smooth, clear, 
-
-
-\soln Use \menu{Preprocessing > Convolution > Gaussian Filters} with sigma 2 and \menu{Segmentation>Threshold} with range [1,255]. \solnend
-        \item Segment the nuclei. \soln Use \menu{Segmentation>Threshold} with range [30,255], Smooth 5x, Clean OFF, FillHoles OFF, Separate OFF and set the minimal size of the object to \SI{5}{\micro\meter}. \solnend
-        \item Separate the touching cells using the nuclei. Drop \menu{Binary processing > Detect > Distance function} onto the Golgi marker (Ch2-T1) binary. Use the \menu{Binary processing> Region growing > Watershed} select the type ``From Bright Regions''. Use \menu{Binary operations > And} linking the result of the watershed (Ch1-T4) and the initial cell mask (Ch2-T1) to restrict the mask to the cells.
+        \item Create a mask for the cells using the Golgi marker (Ch2-T1) channel using \menu{Preprocessing > Convolution > Gaussian Filter} and \menu{Segmentation>Threshold} \endnote{median filter:2px, threshold 1-255, smooth:, clear:}. Note that the image bit depth changed to 32-bit after filtering.
+        \item Segment the nuclei using \menu{Segmentation>Threshold} \endnote{threshold: 30-inf, smooth \SI{1}{\micro\meter}, clean , \SI{1}{\micro\meter}, fill holes OFF, Separate OFF and size \SI{5}{\micro\meter}-1000.}.
+        \item Add the action \menu{Binary processing > Detect > Distance function} to the Golgi marker (Ch2-T1) binary. 
+        \item Use the \menu{Binary processing> Region growing > Watershed} select the type ``From Bright Regions''. 
+        \item Use \menu{Binary operations > And} linking the result of the watershed (Ch1-T4) and the initial cell mask (Ch2-T1) to restrict the mask to the cells.
+        \item Rename the binary as ``Cells''.
     \end{enumerate}
-    \item Measure the colocalization of the cargo protein with the Golgi marker (resp the mitochondria). Use \menu{Measurement > Object ratiometry > Pearson Coeff} to measure the colocalization coefficient between the Golgi (Ch2-T1, link to B) and cargo protein (ChS2-T2, link to C) within the segmented region (binary to link to A). Use \menu{Measurement > Object ratiometry > Pearson Coeff} to measure the colocalization coefficient between the mitochondria (ChS1-T3, link to B) and cargo protein (ChS2-T2, link to C) within the segmented region (binary to link to A).
-    \item Measure the mean intensity of the mitochondria channel.
-    \item Merge the three records table together. \soln Use \menu{Data Management > Basic > AppendColumns}. \solnend
-    \item At this point make sure that the workflow doesn’t remove any channel.
-    \item Batch process all the other lsm files. Close the GA3 interface and navigate to \menu{Image>Batch GA3}.
-    \item Save all the .lsm files as .nd2 files into a different folder while tick the "keep original" option.
-    \item Create a figure with the two conditions based on low and high level of mitochondria expression.
+    \item Use \menu{Measurement > Object ratiometry > Pearson Coeff} to measure the colocalization coefficient between the Golgi (Ch2-T1, link to B) and cargo protein (ChS2-T2, link to C) within the segmented region (binary to link to A). 
+    \item Repeat to measure the colocalization coefficient between the mitochondria and cargo protein.
+    \item Measure the mean intensity of the mitochondria channel using \menu{Measurement > Object Intensity > Mean}.
+    \item Merge the three records table together using \menu{Data Management > Basic > AppendColumns}.
+    \item At this point make sure that the workflow doesn't remove any channel
+    \item Save the recipe
+    \item Export all images lsm as nd2 files using \menu{File>Import/Export>Convert files}.
+    \item Open the batch processing module using \menu{Image>Batch GA3}.
 \end{enumerate}
