@@ -25,7 +25,13 @@ DOI:10.1126/sciadv.adl0608
     \item Open the image ``Zeiss1344.lsm''.
     \item Segment the cells using a seeded watershed approach by following the three steps below:
     \begin{enumerate}
-        \item Create a mask for the cells using the Golgi marker (Ch2-T1) channel. \soln Use \menu{Preprocessing > Convolution > Gaussian Filters} with sigma 2 and \menu{Segmentation>Threshold} with range [1,255]. \solnend
+        \item Create a mask for the cells using the Golgi marker (Ch2-T1) channel. 
+median filter 2px
+threshold 8-255
+smooth, clear, 
+
+
+\soln Use \menu{Preprocessing > Convolution > Gaussian Filters} with sigma 2 and \menu{Segmentation>Threshold} with range [1,255]. \solnend
         \item Segment the nuclei. \soln Use \menu{Segmentation>Threshold} with range [30,255], Smooth 5x, Clean OFF, FillHoles OFF, Separate OFF and set the minimal size of the object to \SI{5}{\micro\meter}. \solnend
         \item Separate the touching cells using the nuclei. Drop \menu{Binary processing > Detect > Distance function} onto the Golgi marker (Ch2-T1) binary. Use the \menu{Binary processing> Region growing > Watershed} select the type ``From Bright Regions''. Use \menu{Binary operations > And} linking the result of the watershed (Ch1-T4) and the initial cell mask (Ch2-T1) to restrict the mask to the cells.
     \end{enumerate}
