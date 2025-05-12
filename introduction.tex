@@ -76,13 +76,26 @@ Saving of channels and binary layers can be enabled case by case using a right c
 
 \subsection{Image processing concepts}
 
+\paragraph{Threshold}
+
 \paragraph{Median filter} 
 
 \paragraph{Rolling ball} Rolling ball is used for correcting shading and non-even background. It works by subtracting a background image estimated by dilating and eroding the image.
 
 \paragraph{Watershed}
 
-\paragraph{Thresholding}
+
+
+\subsection{Sample preparation and microscopy}
+
+Lots of time can be saved by adjusting sample preparation and imaging to match existing  analysis tools.
+
+\paragraph{Housekeeping labels} If possible, and when aiming at cell level statistics, include extra labels that will help identify cells location during sample preparation. A DNA stains such as DAPI and Hoescht and a plasma membrane marker such as WGA, Invitrogen's CellMask or Biotium's CellBrite can be used for example. 
+
+\paragraph{Cell confluency} Depending on the type of analysis workflow and the cell line, high cell conflucency can be counterproductive as cell will tend to grow on top of each other.
+
+\paragraph{Dataset size} When acquiring data, have in mind the scale of the process you want to capture. If only a fraction of the cells are of interest, define multiple position instead of tiling a large field of view at high resolution will reduce the size of the dataset.
+
 
 
 
