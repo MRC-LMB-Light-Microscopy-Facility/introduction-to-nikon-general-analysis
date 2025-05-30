@@ -33,9 +33,8 @@
 }
 
 \newcommand{\drawpixel}[5]{%
-    \pgfmathsetmacro{\col}{int(round((\pix-#2)/(#3-#2)))}
-    \pgfmathparse{int(round((\pix-#2)/(#3-#2)*255))}%
-    \draw[fill=black!\col!white] (#1,#2) rectangle (#1+1,#2+1); % Draw a square
+    \pgfmathsetmacro{\col}{100*(\pix-#4)/(#5-#4)}%
+    \draw[fill=white!\col!black] (#1,#2) rectangle (#1+1,#2+1); % Draw a square
     \node at (#1+0.5,#2+0.5) {\tiny #3}; % Place intensity value in the center   
 }
 
