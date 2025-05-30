@@ -1,33 +1,24 @@
 \section{Introduction}
 
-\subsection{Objectives}
-
-\begin{itemize}
-    \item Identify the image processing steps of a recipe such filtering, segmentation and binary processing.
-    \item Manage records and table.
-    \item Create a GA3 recipe for a given analysis problem.
-    \item Batch process collection of files.
-\end{itemize}
-
 \subsection{General interface}
 
 \paragraph{Preliminary steps}
 Once the GA3 module opened, other windows cannot be opened, therefore
 \begin{itemize}
     \item you will need to open the image you want to work with first,
-    \item it is convenient to open the LUTs tools first (\keys{\ctrl+\Alt+L}).
+    \item it is convenient to open the LUT tools first (\keys{\ctrl+\Alt+L}).
 \end{itemize}
 To access the GA3 interface, you can either:
 \begin{itemize}
     \item use the menu \menu{Image>New GA3 recipe\dots},
     \item use the menu \menu{Image>Analysis Explorer\dots} to open the analysis exporter and then click on \menu{Create New},
-    \item right-click on the background of the interface, select \menu{Analysis Controls>Analysis Explorer} to open the analysis exporer and then click on \menu{Create New}.
+    \item right-click on the background of the interface, select \menu{Analysis Controls>Analysis Explorer} to open the analysis explorer and then click on \menu{Create New}.
 \end{itemize}
 
 \paragraph{Loading and saving recipes}
 
 \begin{itemize}
-    \item Use \menu{Save} or \menu{Save As} to save the recipe in the local database. It will be then listed in the Analyis Explorer.
+    \item Use \menu{Save} or \menu{Save As} to save the recipe in the local database. It will be then listed in the Analysis Explorer.
     \item Use your name as a prefix so that we can contact you if the database needs to be cleared.
     \item Use \menu{Export} to export the recipe in a folder of your choice. This recipe can then be reloaded on another computer. It is good practice to have a copy of the recipes in that way.
     \item Use \menu{Import} to reload an exported recipe. 
@@ -52,7 +43,7 @@ To access the GA3 interface, you can either:
     \label{fig:nodes}
 \end{figure}
 
-The recipes describes a workflow as a graph. The graph is compose of 4 types of nodes (See Fig.~\ref{fig:nodes}):
+Recipes describe a workflow as a graph. The graph is composed of 4 types of nodes (See Fig.~\ref{fig:nodes}):
 \begin{enumerate}\setlength\itemsep{0em}
     \item color: original or processed grayscale images
     \item action: processing steps on images, binary or tables
@@ -74,17 +65,35 @@ Saving of channels and binary layers can be enabled case by case using a right c
     \item Click on the question mark on each operation (top left) for more information if needed.
 \end{itemize}
 
-\subsection{Image processing concepts}
+\subsection{Basic image processing concepts}
 
-\paragraph{Threshold}
+\paragraph{Threshold} Threshold is the simplest form of image segmentation. At each location of the image, a decision is taken to classify this point as foreground or background. 
 
-\paragraph{Median filter} 
+\paragraph{Median filter} The median filter is creating a new image where each pixel is computed as the median value of the pixels in a neighborhood of this pixel.
 
 \paragraph{Rolling ball} Rolling ball is used for correcting shading and non-even background. It works by subtracting a background image estimated by dilating and eroding the image.
 
-\paragraph{Watershed}
+\begin{figure}\centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=left, 
+            xlabel={$x$},
+            ylabel={gray levels},
+            domain=0:10,
+            grid=major,
+            samples=100,
+            ymin=0.5
+        ]
+            \addplot[gray,very thick] {exp(-(x-6)^2 / 100)};
+            \addplot[blue!50!gray,very thick] {0.8*exp(-(x-3)^2 / 0.25)+exp(-(x-7)^2 / 0.25)+exp(-(x-6)^2 / 100)};
+            \draw [red!50!gray,fill] (3.2,0.7) ellipse [x radius=1.3, y radius=0.25]; 
+            % \draw (0,0) circle [radius=1];
+        \end{axis} 
+    \end{tikzpicture}
+    \caption{Illustration of the rolling ball}
+\end{figure}
 
-
+\paragraph{Watershed} The watershed algorithm associate to seed regions pixels in the image in the order of a priority map. It can also be interpreted as flooding a landscape.
 
 \subsection{Sample preparation and microscopy}
 
@@ -92,7 +101,7 @@ Lots of time can be saved by adjusting sample preparation and imaging to match e
 
 \paragraph{Housekeeping labels} If possible, and when aiming at cell level statistics, include extra labels that will help identify cells location during sample preparation. A DNA stains such as DAPI and Hoescht and a plasma membrane marker such as WGA, Invitrogen's CellMask or Biotium's CellBrite can be used for example. 
 
-\paragraph{Cell confluency} Depending on the type of analysis workflow and the cell line, high cell conflucency can be counterproductive as cell will tend to grow on top of each other.
+\paragraph{Cell confluence} Depending on the type of analysis workflow and the cell line, high cell confluence can be counterproductive as cell will tend to grow on top of each other.
 
 \paragraph{Dataset size} When acquiring data, have in mind the scale of the process you want to capture. If only a fraction of the cells are of interest, define multiple position instead of tiling a large field of view at high resolution will reduce the size of the dataset.
 

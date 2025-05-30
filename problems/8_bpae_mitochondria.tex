@@ -1,0 +1,33 @@
+\section{Mitochondria in BPAE cells} \label{sec:bpae-mitochondria}
+
+\subsection*{Problem}
+BPAE have been labelled a mitochondria marker and imaged in widefield microscopy. We would like to measure the ``amount'' of mitochondria in each cells. This time, are going to use the General Analysis module instead of GA3.
+
+\paragraph{Dataset} The file in \directory{8 BPAE mitochondria/20x comp001.nd2} contains 3 channels:
+\begin{enumerate}
+    \item Blue: DAPI
+    \item Yellow: Alexa Fluor 488 phalloidin
+    \item Red: MitoTracker Red CMXRos
+\end{enumerate}
+
+\paragraph{Credit} Nick Barry - MRC LMB
+
+\subsection*{Step-by-step instructions}
+\paragraph{Cell segmentation}
+\begin{enumerate}
+    \item In ``Analysis Palette'' click on ``Add channel'' with name:``Cells'' and channel:``Blue''.
+    \item Set the threshold range to ``200-2047'', smooth: 1x, separate: 1x.
+    \item In ``Binary processing'' add a step \menu{Region Growing>Grow Bright Regions to Intensity} to channel Yellow with Min set to 120.
+    \item Check ``Save Binary'' and \menu{Feature > AllObjects > Count}
+\end{enumerate}
+
+\paragraph{Mitochondria segmentation}
+\begin{enumerate}
+    \item In the ``Analysis Palette'' tab click on ``Add channel'' with name: ``Mitochondria'' and channel: ``Red''.
+    \item Add add a \menu{Denoising > median} (Count 1x), a \menu{Background Correction >
+Rolling Ball} (size:\SI{0.97}{\micro\mater}) and a \menu{Contrast > Local Contrast} (size:10,  
+power:50\%).
+    \item Set the threshold ``200-2047''.
+\end{enumerate}
+
+\paragraph{}

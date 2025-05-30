@@ -1,6 +1,6 @@
 \section{Synthetic cells}
 
-\subsection{Problem}
+\subsection*{Problem}
 In this problem, we make abstraction of the preprocessing steps and focus on the manipulation of binary layers. The image is a sketch representation of three cells with nuclei, cyctosol and some putative vesicles. We want to count the number of vesicle and the area of the nuclei area for each cell.
 
 \begin{center}
@@ -12,7 +12,7 @@ In this problem, we make abstraction of the preprocessing steps and focus on the
 \end{tabular}   
 \end{center}
 
-\paragraph{Dataset:} The image is \path{synthetic_cells.nd2} with the following channels:
+\paragraph{Dataset:} The image is \directory{3 synthetic cells/synthetic cells.nd2} with the following channels:
 \begin{itemize}\setlength\itemsep{0em}
     \item red: endosomes
     \item green: cytoplasm
@@ -21,15 +21,15 @@ In this problem, we make abstraction of the preprocessing steps and focus on the
 
 \paragraph{Concepts} object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
 
-\begin{description}
-    \item[Task:] For each cell, count the number of red dots and measure the area of the nuclei.
-    \item[Data:] ``synthetic cells.nd2'' with three channels: dots (red), cytoplasm (green) and nuclei (blue). 
-    \item[Topics:] object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
-    \item[Duration:] 30 min
-    \item[Step by step:]
-\end{description}
+% \begin{description}
+%     \item[Task:] For each cell, count the number of red dots and measure the area of the nuclei.
+%     \item[Data:] ``synthetic cells.nd2'' with three channels: dots (red), cytoplasm (green) and nuclei (blue). 
+%     \item[Topics:] object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
+%     \item[Duration:] 30 min
+%     \item[Step by step:]
+% \end{description}
 
-\subsection{Step-by-step instructions}
+\subsection*{Step-by-step instructions}
 
 \begin{enumerate}
     \item Load the image ``synthetic cells.nd2''.

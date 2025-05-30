@@ -1,0 +1,41 @@
+\section{\textit{Dendraster excentricus} embryos}
+
+\subsection*{Problem}
+A developing sand dollar embryo expressing GFP-histone H2B have been images using video-microscopy every \SI{30}{\second} for \SI{100}{\hour}. We want to segment and visualize the number of cells at each frame in a first step and later track the cells over time.
+
+\paragraph{Dataset} The file \directory{7 dendraster excentricus/cil-15798.tif} has one channel and 200 time points.
+
+\paragraph{Concepts} 
+preprocessing (Rolling Ball), 
+segmentation (Threshold), 
+object tracking, 
+measurement (Object Count), 
+results (Linechart)
+
+\paragraph{Reference} 
+George Von Dassow (2011) CIL:15798, Dendraster excentricus. CIL.Dataset. 
+
+https://doi.org/doi:10.7295/W9CIL15798
+
+
+% \begin{description}
+%     \item[Task:] Track the cells along the division and count the number of cells over time.
+%     \item[Data:] ``cell division.tif'' with one channel and 200 time points.
+%     \item[Topics:] preprocessing (Rolling Ball), segmentation (Threshold), object tracking, measurement (Object Count), results (Linechart)
+%     \item[Reference:] 
+%         George Von Dassow (2011) CIL:15798, Dendraster excentricus. \\
+%         CIL.Dataset. https://doi.org/doi:10.7295/W9CIL15798
+%     \item[Duration:] 40 min
+%     \item[Step by step:]
+% \end{description}
+
+\subsection*{Step-by-step instructions}
+
+\begin{enumerate}
+    \item Open the image ``cell division.tif'' and open \menu{Image > new GA3 recipe}.
+    \item Segment the nuclei using for example \menu{Preprocessing>Background>Rolling Ball}\endnote{radius:10px} and \menu{Segmentation>Threshold>Threshold}\endnote{range: [10, INF], smooth:8x, clean:1x, fill holes:off, separate:1x and size:5-INF.}
+    \item To count the number of nuclei in the field of view we can use  \menu{Measurement>Whole Field>Object Count}.
+    \item However, this gives only the count only for a single frame, to get the results for each frame, we can use \menu{Data Management > Accumulate Records}.
+    \item Next, let's visualize the number of nuclei vs time using \menu{Results>Graphs>Linechart}.
+    \item We could also track the individual nuclei droping \menu{Tracking>Track Objects} and \menu{Tracking>Tracks>Accumulate Tracks}.
+\end{enumerate}

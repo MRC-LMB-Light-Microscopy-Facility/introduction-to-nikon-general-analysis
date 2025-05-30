@@ -1,0 +1,24 @@
+\section{Particle tracking}
+
+\subsection*{Problem}
+
+\paragraph{Dataset} ``synthetic beads.nd2'' with one channel and 20 time points.
+
+\paragraph{Concepts} Segmentation (Bright Spots), Tracking (Time \& centroid, Track Particles, Accumulate \& group, Speed), Measurement (Mean Obj Intensity), Results (Linechart)
+
+\subsection*{Step-by-step instructions}
+
+\begin{enumerate}
+    \item Open the file ``synthetic beads.nd2'' and open \menu{Image>General Analysis 3}.
+    \item To detect the particles, use \menu{Segmentation>Spot Detections>Bright Spots}\endnote{typical diameter:0.5 and contrast 2}. 
+    \item Use the \menu{Tracking>2D Object Position>Time \& Centroid} to extract the centroid of each particle and store it in a table.
+    \item Measure the mean intensity of each particle using \menu{Measurement>Object intensity>Mean Obj Intensity}.
+    \item Merge the two tables to have the centroid and the mean intensity of each particle in one table. 
+    \item Track the particles using \menu{Tracking > 2D Tracking > Track Particles}. Check that the columns matches the ones from the centroid table. We can see that a new column ``TrackId'' is added but only one frame have been processed\endnote{stdev multiplicative factor:4}.
+    \item To tracks accross the across the frames of the whole image sequence we need to add \menu{Tracking > Tracks > Accumulate Tracks}, now the table has grouped the objects by tracks and a new tracking icon appeared at the top of the table.   
+    \item Let's measure the intensity of the particles in addition to their position. For this we can simply drop \menu{Measurement>Object Intensity>Mean} on the ``Time and Centroid'' element.
+\end{enumerate}
+
+\begin{description}
+    \item[Optional:] Use the tracking module on the binaries generate by the workflow.
+\end{description}

@@ -20,16 +20,11 @@
 \usepackage{booktabs}   % nicer table
 \usepackage{fourier}    % warning symbol
 \pagestyle{headings}     % use srartcl headings style
-
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11} 
 \usepackage{enotez}      % create end notes with the solutions
 \setenotez{backref=true}
 
-
-\newcommand{\showsolutions}{\long\def\soln ##1\solnend{##1}}
-\newcommand{\nosolutions}{\long\def\soln##1\solnend{}}
-
-\showsolutions
-%\nosolutions
 
 \title{Nikon NIS-Elements\\ General Analysis 3}
 \author{Dina Ratsimandresy, Jérôme Boulanger}
@@ -39,23 +34,25 @@
 
 \maketitle
 
-% \tableofcontents
+\paragraph{Objectives}
+By the end of this workshop, participant will be able to:
+\begin{itemize}
+\item Given acquired microscope image data, create a GA3 recipe to accurately quantify image content.
+\item From generated results, store data as both table and binary files, following best practices.
+\item Given a newly created GA3 recipe, apply it to batch process a given set of images independently.
+\end{itemize}
 
-\input{introduction} 
-\newpage
-\input{problems/channel_manipulation}
-\newpage
-\input{problems/nuclei_segmentation}
-\newpage
-\input{problems/synthetic_cells}
-% \newpage
-% \input{problems/cargo_relocation}
-% \newpage
-% \input{problems/particle_tracking}
-% \newpage
-% \input{problems/infected_cells}
-% \newpage
-% \input{problems/cell_division}
+\tableofcontents \newpage
+
+\input{introduction}  \newpage
+\input{problems/1_channel_manipulation} \newpage
+\input{problems/2_nuclei_segmentation} \newpage
+\input{problems/3_synthetic_cells} \newpage
+\input{problems/4_cargo_relocation} \newpage
+\input{problems/5_particle_tracking} \newpage
+\input{problems/6_infected_cells} \newpage
+\input{problems/7_dendraster_excentricus.tex} \newpage
+\input{problems/8_bpae_mitochondria.tex} \newpage
 
 \appendix
 \printendnotes

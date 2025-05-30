@@ -1,29 +1,32 @@
 \section{Multi-image splitter}
 
-\subsection{Problem}
+\subsection*{Problem}
 
 Images of Invitrogen's FluoCell prepared slide with BPAE cells stained with MitoTracker Red CMXRos have been acquired on a Nikon ISIM microscope equipped with a multi image splitter. The software then always capture two images. However, only one marker was imaged and we would like to discard the blank image. We want to automatize this task to process several images at once and reduce the size of the dataset. The aim of this example is to illustrate the possibility to modify the original files using a GA3 recipe and potentially loose data.
 
-\paragraph{Dataset} The three files \path{isim_001.nd2} .. \path{isim_003.nd2}  have two channels:
+\paragraph{Dataset} The three files \directory{1 channel manipulation/isim\_001.nd2} .. \directory{isim\_003.nd2} have two channels:
     \begin{enumerate}
         \item Red : Image from the frist camera to keep
-        \item Blank : Image to discard
+        \item Blank : Blank image acquire by the splitter
     \end{enumerate}
 
-\paragraph{Concepts} Store results, Batch GA3
+\paragraph{Concepts} 
+Store results, 
+Batch GA3
 
-
-\subsection{Step-by-step instructions}
+\subsection*{Step-by-step instructions}
 \begin{enumerate} 
-    \item Open the image \path{isim_001.nd2} using \menu{File > Open} or a drag and drop.
+    \item Open the image \directory{isim\_001.nd2} using \menu{File > Open} or a drag and drop.
     \item Open General Analysis 3 (see introduction)
     \item Select the Blank channel and select \menu{Do not Store this Result}. Note that a warning appear now at the bottom of the interface: ``Warning: Execution will remove some existing channels.''
     \item You can run the macro using \menu{Run now}, the image loaded in memory is modified, but the file is not saved.
     \item Save the recipe.
     \item Navigate to \menu{Image > Batch GA3}.
-    \item Press the first icon \menu{Add files} and select the recipe and the three \path{isim_001.nd2} .. \path{isim_003.nd2}  files.
-    \item Tick \menu{Keep Original} to save the results in a new set of files in a folder  \path{data/recipe_name +++BGM+++_date_time_}
+    \item Press the first icon \menu{Add files} and select the recipe and the three \directory{isim\_001.nd2} .. \directory{isim\_003.nd2}  files.
+    \item Tick \menu{Keep Original} to save the results in a folder 
+    \directory{recipe\_name +++BGM+++\_date\_time\_} that will contain a copy of the data and the results.
     \item Press \menu{Run}.
     \item The jobs are now also listed under the recipe in the Analysis Explorer.
-    \item Open the processed images from the folder \path{data/+++BGM+++_date_time_}
+    \item Open the processed images from the folder 
+    \directory{recipe\_name +++BGM+++\_date\_time\_}
 \end{enumerate}
