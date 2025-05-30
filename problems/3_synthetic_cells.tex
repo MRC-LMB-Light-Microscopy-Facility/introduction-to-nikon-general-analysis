@@ -1,25 +1,25 @@
-\section{Synthetic cells}
+\subsection{Synthetic cells}
 
-\subsection*{Problem}
-In this problem, we make abstraction of the preprocessing steps and focus on the manipulation of binary layers. The image is a sketch representation of three cells with nuclei, cyctosol and some putative vesicles. We want to count the number of vesicle and the area of the nuclei area for each cell.
+\subsubsection*{Problem}
+In this problem, we make abstraction of the preprocessing steps and focus on the manipulation of binary layers and result tables. The image is a sketch representation of three cells with nuclei, cyctosol and some  ``vesicles''. We want to count the number of vesicle and the area of the nuclei area for each cell.
 
 \begin{center}
-\begin{tabular}{rrr}
-    Cell ID& Number of endosomes& Nuclei area[px$^2$]\\
+\begin{tabular}{ccc}
+    Cell ID& Number of endosomes& Nuclei area[px$^2$]\\\hline
     1&8&6562\\
     2&13&7668\\
     3&9&11895\\
 \end{tabular}   
 \end{center}
 
-\paragraph{Dataset:} The image is \directory{3 synthetic cells/synthetic cells.nd2} with the following channels:
+\paragraph{Dataset:} The image in \directory{3 synthetic cells/synthetic cells.nd2} has the following channels:
 \begin{itemize}\setlength\itemsep{0em}
     \item red: endosomes
     \item green: cytoplasm
     \item blue: nuclei
 \end{itemize}
 
-\paragraph{Concepts} object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
+\paragraph{Objectives} object parenting (ParentID, Child ID, Aggregate Children), data management (GroupRecords, AggegateRows, ModifyColumns, JoinRecords, Aggregate Children), measurement (ObjectArea)
 
 % \begin{description}
 %     \item[Task:] For each cell, count the number of red dots and measure the area of the nuclei.
@@ -29,12 +29,13 @@ In this problem, we make abstraction of the preprocessing steps and focus on the
 %     \item[Step by step:]
 % \end{description}
 
-\subsection*{Step-by-step instructions}
+\subsubsection*{Step-by-step instructions}
 
 \begin{enumerate}
-    \item Load the image ``synthetic cells.nd2''.
+    \item Load the image \directory{3 synthetic cells/synthetic cells.nd2}.
 
-    \item Create binary masks for all the channels with the names ``endosomes'', ``cells'' and ``nuclei'' \endnote{Use a threshold with value 128-255 for example.}. 
+    \item Create binary masks for all the channels with the names ``endosomes'', ``cells'' and ``nuclei'' 
+    \endnote{Use a threshold with value 128-255 for example.}. 
 
     \item For creating a parent-child hierarchy associating the endosomes to the cells and count the number of endosomes per cell, add the action \menu{Measurement>Object parenting>Aggregate Children} with A (parent): ``cells'' binary and B (child): ``endosomes''. 
 
@@ -59,7 +60,7 @@ In this problem, we make abstraction of the preprocessing steps and focus on the
     %     \end{itemize}
     % \end{description}
 
-    \item Measure the area of each nuclei using \menu{Measurement > Object Size > Object Area}.
+    \item Measure the area of each nucleus using \menu{Measurement > Object Size > Object Area}.
     
     \item Add the cell ID to the records of nuclei area using \menu{Measurement > Object parenting > Parent Id} with A (parent) to the ``cell'' and B (child) to the ``nuclei'' binary. 
     

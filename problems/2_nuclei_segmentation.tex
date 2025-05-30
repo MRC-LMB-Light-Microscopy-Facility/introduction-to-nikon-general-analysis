@@ -1,26 +1,29 @@
-\section{Nuclei segmentation} \label{sec:nuclei-segmentation}
+\subsection{Nuclei segmentation} \label{sec:nuclei-segmentation}
 
-\subsection*{Problem}
+\subsubsection*{Problem}
 
 Segmenting the nuclei of cells in microscopy images is often the first step in the quantitative analysis of imaging data for biological and biomedical applications. Here we use an image of the Kaggle Science Data Bowl competition where cells were stained with DAPI or Hoechst. A basic approach based on classifying the pixels of a preprocessed image as foregroud and background using a threshold is used here.
 
 \paragraph{Dataset} The file \directory{2 nuclei segmentation/nuclei.tif} has a single channel ``Mono''.
 
-\paragraph{Concepts} preprocessing (Rolling Ball, Median), segmentation (Threshold), measurement (Circularity, Mean Obj Intensity, Object Area)
+\paragraph{Objectives} preprocessing (Rolling Ball, Median), segmentation (Threshold), measurement (Circularity, Mean Obj Intensity, Object Area)
 
 
 \paragraph{Reference} Caicedo, J.C., Goodman, A., Karhohs, K.W. et al. Nucleus segmentation across imaging experiments: the 2018 Data Science Bowl. Nat Methods 16, 1247–1253 (2019). \url{https://doi.org/10.1038/s41592-019-0612-7}
 
 % 20 min
 
-\subsection*{Step-by-step instructions}
+\subsubsection*{Step-by-step instructions}
 \begin{enumerate}
-    \item Open the image ``nuclei.tif''.
+    \item Open the image \directory{2 nuclei segmentation/nuclei.tif}.
     \item Start the GA3 module.
-    \item Smooth the image using for example a median filter (\menu{Preprocessing > Median}) \endnote{radius:2px}.
-    \item Correct uneven background using a rolling ball from \menu{Preprocessing > Rolling Ball} \endnote{radius:20px, signal is bright: ticked}.
-    \item Classify the pixels of the image as foreground (nuclei) or background using a threshold. Drag the element \menu{Segmentation > Threshold > Threshold} on the previous step and adjust the parameters to segment the nuclei \endnote{Intensity range from 12 to 255, smooth:1x, clean:1x, fill holes:off, separate:2x, size:10-inf}.
-    \item Measure the circularity and mean intensity of the segmented binaries using \menu{Measurement > Object shape > Circularity} and  \menu{Measurement > Object intensity > Mean Obj Intensity}\endnote{For measuring the mean intensity of objects, you'll need a binary mask (A) and an intensity mask (B).}. Dropping them on top of each other will automatically append the columns into a single table.
+    \item Smooth the image using for example a median filter (\menu{Preprocessing > Median}) 
+    \endnote{radius:2px}.
+    \item Correct uneven background using a rolling ball from \menu{Preprocessing > Rolling Ball} 
+    \endnote{radius:20px, signal is bright: ticked}.
+    \item Classify the pixels of the image as foreground (nuclei) or background using a threshold. Drag the element \menu{Segmentation > Threshold > Threshold} on the previous step and adjust the parameters to segment the nuclei 
+    \endnote{intensity range:[12-255], smooth:1x, clean:1x, fill holes:off, separate:2x, size:10-inf}.
+    \item Measure the circularity and mean intensity of the segmented binaries using \menu{Measurement > Object shape > Circularity} and \menu{Measurement > Object intensity > Mean Obj Intensity}. Dragging them directly on top of each other will automatically append the columns into a single table.
     \item To quickly inspect the properties of the measured regions, create a scatter plot using \menu{Results>Graphs>Scatterplot}.
 \end{enumerate}
 

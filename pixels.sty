@@ -1,0 +1,56 @@
+%%%%%%%%%%%%%%%%%%
+% Small images
+%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{pixels}[2015/05/16 Pixels ]
+
+\RequirePackage{ifthen}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,shapes,positioning,matrix}
+\RequirePackage{graphicx}
+
+\definecolor{skyblue1}{RGB}{114,159,207}
+\definecolor{plum1}{RGB}{173,127,168}
+\definecolor{chameleon1}{RGB}{78,154,6}
+\definecolor{chocolate1}{RGB}{193,125,17}
+\definecolor{comments}{RGB}{78,154,6}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{white}{rgb}{1,1,1}
+
+\newcommand\displaypixels[2]{%
+  \begin{tikzpicture}[scale=#2]%
+  \foreach \line [count=\y] in #1 {%
+    \foreach \pix [count=\x] in \line {%
+      \definecolor{currentColor}{RGB}{\pix,\pix,\pix};%
+      \draw[fill=currentColor] (\x,-\y) rectangle +(1,1);%
+    }%
+  }%
+  \end{tikzpicture}%
+}
+
+\newcommand{\drawpixel}[5]{%
+    \pgfmathsetmacro{\col}{int(round((\pix-#2)/(#3-#2)))}
+    \pgfmathparse{int(round((\pix-#2)/(#3-#2)*255))}%
+    \draw[fill=black!\col!white] (#1,#2) rectangle (#1+1,#2+1); % Draw a square
+    \node at (#1+0.5,#2+0.5) {\tiny #3}; % Place intensity value in the center   
+}
+
+% show pixel value (no tikzpicture)
+\newcommand\showpixelsvalue[3]{%
+  \foreach \line [count=\y] in #1 {%
+    \foreach \pix [count=\x] in \line {%
+    \drawpixel{\x}{\y}{\pix}{#2}{#3}
+    }%
+  }%
+}
+
+% display pixels and their value #1 between min #2 and max #3 at scale #4
+\newcommand\displaypixelsvalue[4]{%
+  \begin{tikzpicture}[scale=#4]%
+    \showpixelsvalue{#1}{#2}{#3}%
+  \end{tikzpicture}%
+}

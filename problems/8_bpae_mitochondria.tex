@@ -1,7 +1,7 @@
-\section{Mitochondria in BPAE cells} \label{sec:bpae-mitochondria}
+\subsection{Mitochondria in BPAE cells using General Analysis} \label{sec:bpae-mitochondria}
 
-\subsection*{Problem}
-BPAE have been labelled a mitochondria marker and imaged in widefield microscopy. We would like to measure the ``amount'' of mitochondria in each cells. This time, are going to use the General Analysis module instead of GA3.
+\subsubsection*{Problem}
+BPAE have been labelled a mitochondria marker and imaged in widefield microscopy. We would like to measure the ``amount'' of mitochondria in each cells. This time, are going to use the General Analysis module instead of GA3. This module can be combined with the JOBS module to guide the image acquisition.
 
 \paragraph{Dataset} The file in \directory{8 BPAE mitochondria/20x comp001.nd2} contains 3 channels:
 \begin{enumerate}
@@ -10,24 +10,32 @@ BPAE have been labelled a mitochondria marker and imaged in widefield microscopy
     \item Red: MitoTracker Red CMXRos
 \end{enumerate}
 
-\paragraph{Credit} Nick Barry - MRC LMB
+\paragraph{Credit} Nick Barry at the MRC-LMB
 
-\subsection*{Step-by-step instructions}
+\subsubsection*{Step-by-step instructions}
 \paragraph{Cell segmentation}
 \begin{enumerate}
+    \item Open the image \directory{8 BPAE mitochondria/20x comp001.nd2} and the module \menu{Image>General Analysis\dots}
     \item In ``Analysis Palette'' click on ``Add channel'' with name:``Cells'' and channel:``Blue''.
     \item Set the threshold range to ``200-2047'', smooth: 1x, separate: 1x.
     \item In ``Binary processing'' add a step \menu{Region Growing>Grow Bright Regions to Intensity} to channel Yellow with Min set to 120.
     \item Check ``Save Binary'' and \menu{Feature > AllObjects > Count}
+    \item If not satisfied with the result, try combining a \menu{Region Growing>watershed} with a independent thresholding steps by creating two binaries and combining them.
 \end{enumerate}
 
 \paragraph{Mitochondria segmentation}
 \begin{enumerate}
     \item In the ``Analysis Palette'' tab click on ``Add channel'' with name: ``Mitochondria'' and channel: ``Red''.
-    \item Add add a \menu{Denoising > median} (Count 1x), a \menu{Background Correction >
-Rolling Ball} (size:\SI{0.97}{\micro\mater}) and a \menu{Contrast > Local Contrast} (size:10,  
+    \item Add add a \menu{Denoising > median} (count:1x), a \menu{Background Correction >
+Rolling Ball} (size:\SI{0.97}{\micro\meter}) and a \menu{Contrast > Local Contrast} (size:10,  
 power:50\%).
     \item Set the threshold ``200-2047''.
 \end{enumerate}
 
-\paragraph{}
+\paragraph{Measurement}
+\begin{enumerate}
+    \item Select ``Add ROI'' from the ``Analysis Palette''
+    \item Use ``Cells'' as ROI
+    \item Add a new ``Feature'': ``Count'' selecting ``Mitochondria'' in the ``measured on'' column
+    \item Press ``Run Now'' at the bottom of the interface and check the ``ROI data'' in the window ``Automated Measurement Results''
+\end{enumerate}

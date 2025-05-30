@@ -1,4 +1,4 @@
-\documentclass[a4paper,DIV=17,dvipsnames,headsepline]{scrartcl}
+\documentclass[a4paper,DIV=17,dvipsnames,headsepline,11pt]{scrartcl}
 \usepackage[utf8]{inputenc}
 % \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}    % For including images
@@ -8,11 +8,13 @@
     linkcolor=MidnightBlue,
     filecolor=magenta,      
     urlcolor=MidnightBlue,
-    pdftitle={QuPath training},
+    pdftitle={GA3 training},
     pdfpagemode=FullScreen,
     }
 \usepackage{xcolor}      % For colored text (e.g., to highlight commands)
 \usepackage{menukeys}   % forkeys and menu
+% \renewmenumacro{\menu}[>]{shadowedroundedkeys}
+\renewmenumacro{\directory}[/]{pathswithfolder}
 \usepackage{listings}   % for code
 \usepackage{siunitx}
 \usepackage{lmodern}    % the font
@@ -20,15 +22,17 @@
 \usepackage{booktabs}   % nicer table
 \usepackage{fourier}    % warning symbol
 \pagestyle{headings}     % use srartcl headings style
+\usepackage{tikz}
 \usepackage{pgfplots}
-\pgfplotsset{compat=1.11} 
+\usetikzlibrary{decorations.pathmorphing}
+\pgfplotsset{compat=1.18} 
 \usepackage{enotez}      % create end notes with the solutions
 \setenotez{backref=true}
-
+\usepackage{pixels}
 
 \title{Nikon NIS-Elements\\ General Analysis 3}
-\author{Dina Ratsimandresy, Jérôme Boulanger}
-\date{May 2025}
+\author{Light microscopy facility - MRC LMB}
+\date{June 2025}
 
 \begin{document}
 
@@ -42,9 +46,14 @@ By the end of this workshop, participant will be able to:
 \item Given a newly created GA3 recipe, apply it to batch process a given set of images independently.
 \end{itemize}
 
-\tableofcontents \newpage
+\paragraph{Contributors}
+Nick Barry, Jérôme Boulanger, Ben Sutcliffe, Dina Ratsimandresy
 
+\tableofcontents \newpage
+\section{Introduction}
 \input{introduction}  \newpage
+
+\section{Problems}
 \input{problems/1_channel_manipulation} \newpage
 \input{problems/2_nuclei_segmentation} \newpage
 \input{problems/3_synthetic_cells} \newpage
