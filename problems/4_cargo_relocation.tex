@@ -1,13 +1,13 @@
 \subsection{Selective cargo tethering}
 
-\subsubsection*{Problem}
+\paragraph{Problem}
 
 In this example, we are interested into quantifying the capture of syntaxin-16 cargos vesicles by the mitochondria when the protein TBC1D23 is relocated to the mitochondria. We want to quantify for each cell the level of colocalization between the mitochondria and the cargo to measure the effect of mutant of TBC1D23 on the effectivness of the cargo tethering. Note that not all cells are transfected.
 
 
 \paragraph{Dataset} Prepared cells were imaged using a Zeiss confocal microscope using a 63x/1.4NA oil immersion lens. We will use the lsm file in the folder \directory{4 cargo relocation} which have the following channels:
 
-\begin{itemize}\setlength\itemsep{0em}
+\begin{itemize}\itemsep0em
     \item Ch2-T1 : Golgi maker GM130
     \item ChS2-T2 : cargo protein
     \item ChS1-T3 : mitochondria
@@ -22,7 +22,7 @@ In this example, we are interested into quantifying the capture of syntaxin-16 c
 
 DOI:10.1126/sciadv.adl0608
 
-\subsubsection*{Step-by-step instructions}
+\paragraph{Step-by-step instructions}
 \begin{enumerate}
     \item Open the image \directory{4 cargo relocation/Zeiss1344.lsm}. A windows pop up asking if the image is part of a sequence. Click on the \menu{Leave} button to not collate the files.
     \item Segment the cells using a seeded watershed approach by following the three steps below:
@@ -40,9 +40,9 @@ DOI:10.1126/sciadv.adl0608
     \item Use \menu{Measurement > Object ratiometry > Pearson Coeff} to measure the colocalization coefficient between the Golgi (Ch2-T1, link to B) and cargo protein (ChS2-T2, link to C) within the segmented region (binary to link to A). 
     \item Repeat to measure the colocalization coefficient between the mitochondria and cargo protein.
     \item Measure the mean intensity of the mitochondria channel using \menu{Measurement > Object Intensity > Mean}.
-    \item Merge the three records table together using \menu{Data Management > Basic > AppendColumns}.
-    \item At this point make sure that the workflow doesn't remove any channel
-    \item Save the recipe
+    \item The three records table have matching rows indices, we can merge them together using \menu{Data Management > Basic > AppendColumns}.
+    \item At this point make sure that the workflow doesn't remove any channel.
+    \item Save the recipe.
     \item Export all images lsm as nd2 files using \menu{File>Import/Export>Convert files}.
     \item Open the batch processing module using \menu{Image>Batch GA3}.
 \end{enumerate}

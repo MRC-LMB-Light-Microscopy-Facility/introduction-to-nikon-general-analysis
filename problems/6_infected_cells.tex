@@ -1,13 +1,13 @@
 \subsection{Infected cells}
 
-\subsubsection*{Problem}
+\paragraph{Problem}
 
 In this example, cells are infected by bacteria labelled with several markers. Cells are further stained with DAPI. We want to count the number of bacteria in each cell and get teh combination of positive markers to identify the type of bacteria.
 
 
 \paragraph{Dataset} 
 The samples have been imaged using a Nikon widefield microscope with a 20x/0.75NA objective and an Andor Neo camera (\SI{6.5}{\micro\meter}) resulting to \SI{325}{\nano\meter} pixel size in the image. The file \directory{infected cells.nd2} has the following channels:
-\begin{enumerate}
+\begin{enumerate}\itemsep0em
     \item DAPI (blue)
     \item Bac1 (green)
     \item Bac2 (red)
@@ -18,7 +18,7 @@ The samples have been imaged using a Nikon widefield microscope with a 20x/0.75N
 
 \paragraph{Credits} Agnes Foeglein at the MRC-LMB
 
-\subsubsection*{Step-by-step instructions}
+\paragraph{Step-by-step instructions}
 \begin{enumerate}
     \item Open the file ``Infected cells.nd2'' and start General Analysis 3.
     \item To segmented approximately the cells, we are going to use the DAPI channel. We can use \menu{Segmentation>Spot Detections>Bright Spots} \endnote{diameter:\SI{10}{\micro\meter}, contrast:50, Grow ticked:50} on the DAPI channel to detect spots and grow regions around them.

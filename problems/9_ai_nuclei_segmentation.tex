@@ -1,0 +1,23 @@
+\subsection{AI nuclei segmentation} \label{sec:ai-nuclei-segmentation}
+
+
+\paragraph{Problem} We want to automated the nuclei segmentation step from Section~\ref{sec:dendraster-excentricus} using a deep-learning approach. We will start by creating a rough segmentation result and correct it manually to create a training dataset.
+
+\paragraph{Dataset} We use the file \directory{7 dendraster excentricus/cil-15798.tif}  and extra a single frame for the training.
+
+\paragraph{Objectives} Deep learning segmentation (segment.ai)
+
+\paragraph{Reference} Caicedo, J.C., Goodman, A., Karhohs, K.W. et al. Nucleus segmentation across imaging experiments: the 2018 Data Science Bowl. Nat Methods 16, 1247–1253 (2019). \url{https://doi.org/10.1038/s41592-019-0612-7}
+
+\paragraph{Step-by-step instructions}
+\begin{enumerate}
+    \item Open the image \directory{7 dendraster excentricus/cil-15798.tif} 
+    \item Extract a single frame using a right click, select frame and set frame 0 to 0. Click the ``Mono'' tab under the frames outside the image.
+    \item Start the GA3 module.
+    \item Segment the image using a threshold for example, press run to generate the binary layer.
+    \item Save the image as a nd2 file.
+    \item Open the menu \menu{NIS.ai>Train segment.ai} and select ``Mono'' for both input and output binary.
+    \item Press train to train the network for a few iterations.
+    \item To test the result, open the image sequence.
+    \item Apply the trained network from the ``AI Explorer''.
+\end{enumerate}

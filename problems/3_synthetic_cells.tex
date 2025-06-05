@@ -1,6 +1,6 @@
 \subsection{Synthetic cells}
 
-\subsubsection*{Problem}
+\paragraph{Problem}
 In this problem, we make abstraction of the preprocessing steps and focus on the manipulation of binary layers and result tables. The image is a sketch representation of three cells with nuclei, cyctosol and some  ``vesicles''. We want to count the number of vesicle and the area of the nuclei area for each cell.
 
 \begin{center}
@@ -13,7 +13,7 @@ In this problem, we make abstraction of the preprocessing steps and focus on the
 \end{center}
 
 \paragraph{Dataset:} The image in \directory{3 synthetic cells/synthetic cells.nd2} has the following channels:
-\begin{itemize}\setlength\itemsep{0em}
+\begin{itemize}\itemsep0em
     \item red: endosomes
     \item green: cytoplasm
     \item blue: nuclei
@@ -29,7 +29,7 @@ In this problem, we make abstraction of the preprocessing steps and focus on the
 %     \item[Step by step:]
 % \end{description}
 
-\subsubsection*{Step-by-step instructions}
+\paragraph{Step-by-step instructions}
 
 \begin{enumerate}
     \item Load the image \directory{3 synthetic cells/synthetic cells.nd2}.
@@ -72,6 +72,6 @@ In this problem, we make abstraction of the preprocessing steps and focus on the
     
     \item Use \menu{Data Management > Basic > Join Records} to join using ``Cell Id'' for tables A and B.
     
-    \item Use \menu{Data Management > Basic > Rename Columns} to keep only the necessary columns.
+    \item Use \menu{Data Management > Basic > Modify Columns} to keep only the necessary columns.
 
 \end{enumerate}

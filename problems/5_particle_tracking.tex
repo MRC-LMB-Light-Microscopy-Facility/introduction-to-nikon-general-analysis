@@ -1,6 +1,6 @@
 \subsection{Particle tracking}
 
-\subsubsection*{Problem}
+\paragraph{Problem}
 Here to illustrate particle tracking, moving beads have been simulated using a theoritical point spread function.
 
 \paragraph{Dataset} The file \directory{5 particle tracking/synthetic beads.nd2} has a single channel and 20 time points.
@@ -10,19 +10,18 @@ Here to illustrate particle tracking, moving beads have been simulated using a t
 \paragraph{Objectives} Segmentation (Bright Spots), Tracking (Time \& centroid, Track Particles, Accumulate \& group, Speed), Measurement (Mean Obj Intensity), Results (Linechart)
 
 
-\subsubsection*{Step-by-step instructions}
+\paragraph{Step-by-step instructions}
 
 \begin{enumerate}
     \item Open the file \directory{5 particle tracking/synthetic beads.nd2} and open \menu{Image>General Analysis 3}.
     \item To detect the particles, use \menu{Segmentation>Spot Detections>Bright Spots}
     \endnote{typical diameter:0.5 and contrast 2}. 
     \item Use the \menu{Tracking>2D Object Position>Time \& Centroid} to extract the centroid of each particle and store it in a table.
-    \item Measure the mean intensity of each particle using \menu{Measurement>Object intensity>Mean Obj Intensity}.
-    \item Merge the two tables to have the centroid and the mean intensity of each particle in one table. 
-    \item Track the particles using \menu{Tracking > 2D Tracking > Track Particles}. Check that the columns matches the ones from the centroid table. We can see that a new column ``TrackId'' is added but only one frame have been processed
+    \item Measure the mean intensity of each particle using \menu{Measurement>Object intensity>Mean Obj Intensity} and by adding it to the previous measurement.
+    \item Track the particles using \menu{Tracking > 2D Tracking > Track Particles}. Check that the columns matches the ones from the centroid table. We can see that a new column ``TrackId'' is added, but only one frame have been processed
     \endnote{stdev multiplicative factor:4}.
-    \item To tracks accross the across the frames of the whole image sequence we need to add \menu{Tracking > Tracks > Accumulate Tracks}, now the table has grouped the objects by tracks and a new tracking icon appeared at the top of the table.   
-    \item Let's measure the intensity of the particles in addition to their position. For this we can simply drop \menu{Measurement>Object Intensity>Mean} on the ``Time and Centroid'' element.
+    \item To tracks across the frames of the whole image sequence, we need to add \menu{Tracking > Tracks > Accumulate Tracks}, now the table has grouped the objects by tracks and a new tracking icon appeared at the top of the table.  
+    \item We can display the tracks using the tracking icon at the top of the table.
 \end{enumerate}
 
 
