@@ -1,7 +1,7 @@
 \subsection{Mitochondria in BPAE cells using General Analysis} \label{sec:bpae-mitochondria}
 
 \paragraph{Problem}
-BPAE have been labelled a mitochondria marker and imaged in widefield microscopy. We would like to measure the ``amount'' of mitochondria in each cells. This time, are going to use the General Analysis module instead of GA3. This module can be combined with the JOBS module to guide the image acquisition.
+BPAE cells have been labelled with a mitochondrial marker and imaged in widefield microscopy. We would like to measure the ``amount'' of mitochondria in each cell. This time, we are going to use the General Analysis module instead of GA3. This module can be combined with the JOBS module to guide image acquisition.
 
 \paragraph{Dataset} The file in \directory{8 BPAE mitochondria/20x comp001.nd2} contains 3 channels:
 \begin{enumerate}\itemsep0em
@@ -20,13 +20,13 @@ BPAE have been labelled a mitochondria marker and imaged in widefield microscopy
     \item Set the threshold range to ``200-2047'', smooth: 1x, separate: 1x.
     \item In ``Binary processing'' add a step \menu{Region Growing>Grow Bright Regions to Intensity} to channel Yellow with Min set to 120.
     \item Check ``Save Binary'' and \menu{Feature > AllObjects > Count}
-    \item If not satisfied with the result, try combining a \menu{Region Growing>watershed} with a independent thresholding steps by creating two binaries and combining them.
+    \item If not satisfied with the result, try combining a \menu{Region Growing>watershed} with an independent thresholding step by creating two binaries and combining them.
 \end{enumerate}
 
 \paragraph{Mitochondria segmentation}
 \begin{enumerate}
     \item In the ``Analysis Palette'' tab click on ``Add channel'' with name: ``Mitochondria'' and channel: ``Red''.
-    \item Add add a \menu{Denoising > median} (count:1x), a \menu{Background Correction >
+    \item Add a \menu{Denoising > median} (count:1x), a \menu{Background Correction >
 Rolling Ball} (size:\SI{0.97}{\micro\meter}) and a \menu{Contrast > Local Contrast} (size:10,  
 power:50\%).
     \item Set the threshold ``200-2047''.

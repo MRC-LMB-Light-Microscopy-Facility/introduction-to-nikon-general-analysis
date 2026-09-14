@@ -2,13 +2,13 @@
 
 \paragraph{Problem}
 
-In this example, we are interested into quantifying the capture of syntaxin-16 cargos vesicles by the mitochondria when the protein TBC1D23 is relocated to the mitochondria. We want to quantify for each cell the level of colocalization between the mitochondria and the cargo to measure the effect of mutant of TBC1D23 on the effectivness of the cargo tethering. Note that not all cells are transfected.
+In this example, we are interested in quantifying the capture of syntaxin-16 cargo vesicles by the mitochondria when the protein TBC1D23 is relocated to the mitochondria. We want to quantify for each cell the level of colocalization between the mitochondria and the cargo to measure the effect of TBC1D23 mutants on the effectiveness of cargo tethering. Note that not all cells are transfected.
 
 
-\paragraph{Dataset} Prepared cells were imaged using a Zeiss confocal microscope using a 63x/1.4NA oil immersion lens. We will use the lsm file in the folder \directory{4 cargo relocation} which have the following channels:
+\paragraph{Dataset} Prepared cells were imaged using a Zeiss confocal microscope using a 63x/1.4NA oil immersion lens. We will use the lsm file in the folder \directory{4 cargo relocation} which has the following channels:
 
 \begin{itemize}\itemsep0em
-    \item Ch2-T1 : Golgi maker GM130
+    \item Ch2-T1 : Golgi marker GM130
     \item ChS2-T2 : cargo protein
     \item ChS1-T3 : mitochondria
     \item Ch1-T4 : nuclei marked with DAPI
@@ -24,11 +24,11 @@ DOI:10.1126/sciadv.adl0608
 
 \paragraph{Step-by-step instructions}
 \begin{enumerate}
-    \item Open the image \directory{4 cargo relocation/Zeiss1344.lsm}. A windows pop up asking if the image is part of a sequence. Click on the \menu{Leave} button to not collate the files.
-    \item Segment the cells using a seeded watershed approach by following the three steps below:
+    \item Open the image \directory{4 cargo relocation/Zeiss1344.lsm}. A window pops up asking if the image is part of a sequence. Click on the \menu{Leave} button to not collate the files.
+    \item Segment the cells using a seeded watershed approach by following the steps below:
     \begin{enumerate}
         \item Create a mask for the cells using the Golgi marker (Ch2-T1) channel using \menu{Preprocessing > Convolution > Gaussian Filter} and \menu{Segmentation>Threshold}
-        \endnote{filter radius:2px, threshold 1-255, smooth:, clear:}. 
+        \endnote{filter radius:2px, threshold 1-255, smooth:1x, clean:1x}. 
         Note that the image bit depth changed to 32-bit after filtering.
         \item Segment the nuclei using \menu{Segmentation>Threshold}
         \endnote{threshold:[30-INF], smooth:\SI{1}{\micro\meter}, clean:\SI{1}{\micro\meter}, fill holes OFF, Separate OFF and size \SI{5}{\micro\meter}-1000.}.

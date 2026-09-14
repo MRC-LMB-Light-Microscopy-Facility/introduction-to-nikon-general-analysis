@@ -49,9 +49,14 @@
 \paragraph{Objectives}
 By the end of this workshop, participants will be able to:
 \begin{itemize}
-\item Given acquired microscope image data, create a GA3 recipe to accurately quantify image content.
-\item From generated results, store data as both table and binary files, following best practices.
-\item Given a newly created GA3 recipe, apply it to batch process a given set of images independently.
+  \item Construct automated analysis pipelines (recipes) in GA3 by assembling preprocessing, segmentation, and measurement nodes to accurately quantify microscopy images.
+  \item  Implement advanced segmentation strategies, such as seeded watershed and intensity thresholding, to identify structures and separate touching objects.
+  \item  Quantify spatial and hierarchical relationships between biological structures using object parenting, colocalization metrics, and relational table operations (joins and aggregations).
+  \item  Track moving objects over time-series data to extract dynamic kinematic parameters, including positions, trajectories, and velocities.
+  \item  Train and deploy deep-learning models with NIS.ai to automate segmentation tasks that are challenging for traditional thresholding.
+  \item  Export and manage analysis outputs, saving measurements and binary masks according to reproducible data-handling practices.
+  \item Automate high-throughput processing by executing batch GA3 workflows across multi-image datasets independently.
+
 \end{itemize}
 
 \paragraph{Contributors}
@@ -70,6 +75,7 @@ Nick Barry, Jérôme Boulanger, Ben Sutcliffe, Dina Ratsimandresy
 \input{problems/6_infected_cells} % \newpage
 \input{problems/7_dendraster_excentricus.tex} % \newpage
 \input{problems/8_bpae_mitochondria.tex} % \newpage
+\input{problems/9_ai_nuclei_segmentation.tex} % \newpage
 
 \printbibliography
 

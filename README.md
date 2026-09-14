@@ -2,6 +2,8 @@
 
 This repository contains the latex code of the support material for the training on the NIS module General Analysis from Nikon.
 
+This training is geared towards a problem-solving oriented approach with an introduction to the basic required topics.
+
 ## Learning Objectives
 
 By the end of this course, participants will be able to:

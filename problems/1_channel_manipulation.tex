@@ -2,12 +2,12 @@
 
 \paragraph{Problem}
 
-Images of Invitrogen's FluoCell prepared slide with BPAE cells stained with MitoTracker Red CMXRos have been acquired on a Nikon ISIM microscope equipped with a multi image splitter. The software then always capture two images. However, only one marker was imaged and we would like to discard the blank image. We want to automatize this task to process several images at once and reduce the size of the dataset. The aim of this example is to illustrate the possibility to modify the original files using a GA3 recipe and potentially loose data.
+Images of Invitrogen's FluoCell prepared slide with BPAE cells stained with MitoTracker Red CMXRos have been acquired on a Nikon ISIM microscope equipped with a multi image splitter. The software then always captures two images. However, only one marker was imaged and we would like to discard the blank image. We want to automatize this task to process several images at once and reduce the size of the dataset. The aim of this example is to illustrate the possibility of modifying the original files using a GA3 recipe and potentially losing data.
 
 \paragraph{Dataset} The three files \directory{1 channel manipulation/isim\_001.nd2} .. \directory{isim\_003.nd2} have two channels:
     \begin{enumerate}\itemsep0em
-        \item Red : Image from the frist camera to keep
-        \item Blank : Blank image acquire by the splitter
+        \item Red : Image from the first camera to keep
+        \item Blank : Blank image acquired by the splitter
     \end{enumerate}
 
 \paragraph{Objectives} 
@@ -16,10 +16,10 @@ Batch GA3
 
 \paragraph{Step-by-step instructions}
 \begin{enumerate} 
-    \item Open the image \directory{isim\_001.nd2} using \menu{File > Open} or a drag and drop.
-    \item Open General Analysis 3 (see introduction)
-    \item Select the Blank channel and select \menu{Do not Store this Result}. Note that a warning appear now at the bottom of the interface: ``Warning: Execution will remove some existing channels.''
-    \item You can run the macro using \menu{Run now}, the image loaded in memory is modified, but the file is not saved.
+    \item Open the image \directory{1 channel manipulation/isim\_001.nd2} using \menu{File > Open} or drag and drop.
+    \item Open General Analysis 3 (see introduction).
+    \item Select the Blank channel and select \menu{Do not Store this Result}. Note that a warning appears now at the bottom of the interface: ``Warning: Execution will remove some existing channels.''
+    \item You can run the recipe using \menu{Run now}; the image loaded in memory is modified, but the file is not saved.
     \item Save the recipe.
     \item Navigate to \menu{Image > Batch GA3}.
     \item Press the first icon \menu{Add files} and select the recipe and the three \directory{isim\_001.nd2} .. \directory{isim\_003.nd2}  files.
