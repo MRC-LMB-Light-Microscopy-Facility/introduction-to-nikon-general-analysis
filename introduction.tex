@@ -102,7 +102,7 @@ Saving of channels and binary layers can be enabled case by case using a right c
 
 \paragraph{Morphological opening and closing} Opening and closing are also morphological operations resulting of the combination an erosion followed by a dilation, and respectively, the dilation followed by an erosion. Formally, the opening is defined as $f \circ b  = (f \ominus b) \oplus b$ and the closing is defined as $f \bullet  b  = (f \oplus b) \ominus b$.
 
-\paragraph{Rolling ball} Rolling ball~\cite{sternberg1983} is used for correcting shading and non-even background. It works by subtracting a background image estimated by a morphological opening the image using a structuring element which has radially decaying weights (the ball).
+\paragraph{Rolling ball} Rolling ball~\cite{sternberg1983} is used for correcting shading and uneven background. It works by subtracting a background image estimated by a morphological opening of the image using a structuring element with radially decaying weights (the ball). As a rule of thumb, the ball radius must be set larger than the largest structural feature of interest, but smaller than the low-frequency illumination variation; otherwise, bright interior regions of large objects will be erroneously subtracted.
 
 \begin{figure}[ht]\centering
   \begin{tikzpicture}[scale=0.8]
@@ -162,13 +162,17 @@ Saving of channels and binary layers can be enabled case by case using a right c
 
 
 
-\paragraph{Watershed} The watershed algorithm associate to seed regions pixels in the image in the order of a priority map. It can also be interpreted as flooding a landscape or digital elevation model (DEM) (see Figure~\ref{fig:watershed}). In practice, several algorithms can be considered for implementing a watershed. One of them is called ``priority-flood''~\cite{barnes2014} where starting from seeds, each neighboring pixels (e.g. $3 \times 3$) are added to a queue by order of priority given by a priority map (minimum elevation of the landscape). The queue keeps track of the priority value, the location and the label of the basin. Seeds can be defined as local minima of the landscape function. At each iteration, the highest priority element is popped out of the queue, if not already labeled the pixel if attributed the label of the current basin and its neighbors added to the queue.
+\paragraph{Watershed and distance transform} The watershed algorithm associates seed regions to pixels in the order of a priority map, analogous to flooding a topographic digital elevation model (DEM) (see Figure~\ref{fig:watershed}). In seeded watershed segmentation, separating touching objects often relies on computing the Euclidean Distance Transform (EDT) on a binary mask: $D(x) = \min_{y \in \text{Background}} \|x - y\|$. The EDT assigns to each foreground pixel its distance to the nearest boundary. Inverting this distance map transforms flat connected blobs into inverted cone-shaped basins, where local distance peaks serve as seeds to split touching cells along natural constrictions. In practice, algorithms such as ``priority-flood''~\cite{barnes2014} efficiently flood basins from these seeds using priority queues.
 
-\paragraph{Pearson correlation coefficient} The Pearson correlation coefficient (PCC)~\cite{pcc} is a statistical tool used to measure the linear correlation between two signals indicating the potential colocalization of two labelled molecular populations. If we have the pair of red and green intensities $(r_i,g_i)$ at each location $i$ in the image, the PCC is defined as
+\paragraph{Spot detection} Sub-diffraction or punctate fluorescent signals (e.g., vesicles, endosomes, single molecules) approximate the microscope's point spread function (PSF). Detecting these puncta is commonly performed via band-pass scale-space filtering, such as Difference of Gaussians (DoG) or Laplacian of Gaussian (LoG). In GA3's \menu{Bright Spots} node, users specify a \textit{typical diameter} matching the expected optical PSF width and a \textit{contrast} threshold. The operator highlights local intensity maxima exceeding local background fluctuations, providing robust detection of diffraction-limited spots.
+
+\paragraph{Particle tracking and linking} Tracking dynamic objects across time-series involves two distinct stages: (1) independent object or spot detection within each frame, and (2) temporal trajectory linking across consecutive frames. Trajectory linking associates centroids at frame $t$ with detections at frame $t+1$ by solving a linear assignment problem under maximum displacement constraints. In GA3, the standard deviation multiplicative factor defines an adaptive search radius based on observed Brownian displacement; detections outside this search radius initiate new tracks or are marked as terminated.
+
+\paragraph{Pearson correlation coefficient and colocalization} The Pearson correlation coefficient (PCC)~\cite{pcc} measures the linear correlation between intensities of two channels $(r_i,g_i)$ across pixels $i$:
 $$\mathrm{PCC} = \frac{\sum_i(r_i-\bar{r})(g_i-\bar{g})}{\sqrt{\sum_i(r_i-\bar{r})^2} \sqrt{\sum_i(g_i-\bar{g})^2}}$$
-with the means $\bar{r} = n^{-1}\sum_i r_i$ and $\bar{g} = n^{-1}\sum_i g_i$. The value of the PCC ranges from -1 to 1 where a value of 1 indicates a perfect positive linear correlation.
+with means $\bar{r} = n^{-1}\sum_i r_i$ and $\bar{g} = n^{-1}\sum_i g_i$. Crucially, PCC must be computed within segmented regions of interest (mask-restricted colocalization). Calculating PCC across an entire unsegmented field of view is dominated by dark background pixels, generating misleading correlation artifacts.
 
-\paragraph{Table join} To combine measurements from two tables, we can use a ``join''~\cite{join} which will find matching rows sharing a common reference index. The ``inner join'' operation will include only the matching rows in both tables (See Figure~\ref{fig:join}). Manipulating tables can replace logical operations on binary masks when combined with object parenting. In the simpler case where tables have the same corresponding rows in the same order, tables can be simply collated with each other.
+\paragraph{Object parenting and relational tables} Quantifying spatial relationships (e.g., counting vesicles inside cells) establishes a 1-to-many hierarchical relationship: each parent cell contains $N$ child objects. In GA3, object parenting assigns a parent identifier (\textit{e.g.}, `CellID`) to each child record. Tabular aggregation nodes (\menu{Aggregate Rows}) can then compute per-parent summaries (\textit{e.g.}, `COUNT` of child spots, or `SUM` of child areas). Finally, relational operations such as \menu{Join Records} merge parent morphology tables with child aggregate tables using the common identifier (See Figure~\ref{fig:join}).
 
 \begin{figure}[ht]\centering
   \begin{tikzpicture}
@@ -207,6 +211,8 @@ with the means $\bar{r} = n^{-1}\sum_i r_i$ and $\bar{g} = n^{-1}\sum_i g_i$. Th
   \caption{Inner join of two tables based on the column id.}
   \label{fig:join}
 \end{figure}
+
+\paragraph{Deep learning vs.\ classical segmentation} Classical segmentation relies on manually tuned heuristics (intensity thresholds, morphological size filters, gradient edges). While computationally lightweight, these methods often fail in low signal-to-noise regimes, non-uniform staining, or dense tissue. Deep-learning approaches (such as NIS.ai \menu{segment.ai}, based on convolutional neural networks like U-Net) learn multi-scale contextual features directly from annotated training pairs (raw image $\leftrightarrow$ binary ground-truth). The model's generalization depends strictly on annotation fidelity: systematic annotation errors in the training set propagate directly into the trained network.
 
 
 

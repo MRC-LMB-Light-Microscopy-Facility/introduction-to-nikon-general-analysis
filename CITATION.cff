@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use, adapt, or build upon this training material, please cite it as below."
+title: "Introduction to Nikon NIS-Elements General Analysis 3 (GA3)"
+authors:
+  - family-names: "Barry"
+    given-names: "Nick"
+    affiliation: "MRC Laboratory of Molecular Biology, Cambridge, UK"
+  - family-names: "Boulanger"
+    given-names: "Jérôme"
+    affiliation: "MRC Laboratory of Molecular Biology, Cambridge, UK"
+  - family-names: "Sutcliffe"
+    given-names: "Ben"
+    affiliation: "MRC Laboratory of Molecular Biology, Cambridge, UK"
+  - family-names: "Ratsimandresy"
+    given-names: "Dina"
+    affiliation: "MRC Laboratory of Molecular Biology, Cambridge, UK"
+version: 1.0.0
+date-released: 2025-06-01
+url: "https://github.com/MRC-LMB-Light-Microscopy-Facility/introduction-to-nikon-general-analysis"
+repository-code: "https://github.com/MRC-LMB-Light-Microscopy-Facility/introduction-to-nikon-general-analysis"
+license: CC-BY-4.0
+keywords:
+  - "microscopy"
+  - "bioimage-analysis"
+  - "nikon-nis-elements"
+  - "general-analysis-3"
+  - "image-segmentation"
+  - "particle-tracking"
+  - "training"

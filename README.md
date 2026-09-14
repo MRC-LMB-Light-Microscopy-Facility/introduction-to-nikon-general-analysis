@@ -16,3 +16,11 @@ By the end of this course, participants will be able to:
 - **Export and manage analysis outputs**, saving measurements and binary masks according to reproducible data-handling practices.
 - **Automate high-throughput processing** by executing batch GA3 workflows across multi-image datasets independently.
 
+## License
+
+This course material is licensed under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE) license.
+
+## Citation
+
+If you use or adapt this training material in your work or teaching, please cite it using the metadata in [CITATION.cff](CITATION.cff).
+
